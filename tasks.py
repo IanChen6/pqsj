@@ -26,7 +26,7 @@ redis_cli=redis.StrictRedis(host='localhost', port=6379, decode_responses=True)
 def run_test(user, pwd, batchid, batchyear, batchmonth,companyid, customerid,host,port,db):
     print("++++++++++++++++++++++++++++++++++++")
     print('jobs[ts_id=%s] running....' % batchid)
-    time.sleep(5)
+    time.sleep(2)
     logger=create_logger()
     try:
         gs = guoshui(user,pwd,batchid,batchyear, batchmonth,companyid, customerid)
@@ -38,7 +38,7 @@ def run_test(user, pwd, batchid, batchyear, batchmonth,companyid, customerid,hos
     return result
 while True:
     # ss=redis_cli.lindex("list",0)
-    ss=redis_cli.lpop("list")
+    ss=redis_cli.lpop("szgslist")
     if ss is not None:
     # print(redis_cli.lpop("list"))
         sd=json.loads(ss)

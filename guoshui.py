@@ -6,8 +6,6 @@ from urllib.parse import urlencode
 
 from selenium.webdriver import ActionChains
 
-from get_db import get_db
-
 __author__ = 'IanChen'
 # selinium需要专用的driver来调用浏览器
 import os
@@ -25,6 +23,8 @@ from pdfminer.layout import LTTextBoxHorizontal, LAParams
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
 from pdfminer.pdfparser import PDFParser, PDFDocument
+from suds.client import Client
+import suds
 
 try:
     import urlparse as parse
@@ -34,6 +34,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import hashlib
 from log_ging.log_01 import *
 from get_db import job_finish
+from get_db import get_db
 
 #
 logger = create_logger()
@@ -122,15 +123,26 @@ class guoshui(object):
         img = self.upload_img(path)
         return img
 
-    def captcha(self):
-        with open('captcha.jpg', 'rb') as f:
-            base64_data = str(base64.b64encode(f.read()))
-            base64_data = base64_data[2:-1]
-
-            post_data = {"a": 1, "b": base64_data}
-            post_data = json.dumps({"a": 1, "b": base64_data})
-            res = requests.post(url="http://39.108.112.203:8002/mycode.ashx", data=post_data, timeout=30)
-            return res.text
+    def tagger(self,tupian, md):
+        while True:
+            # formdata = {'CompanyID': 123456, 'BatchID': "1215454545", 'JobName': "pyj", 'CodeMD5': md, 'CodeData': tupian}
+            # resp=requests.get(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl",data=formdata)
+            client = suds.client.Client(url="http://39.108.112.203:8701/SZYZService.asmx?wsdl")
+            # client = suds.client.Client(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl")
+            auto = client.service.GetYZCodeForDll(tupian)
+            if auto is not None:
+                tagger = str(auto)
+                flag = self.login()
+                break
+            result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
+            # flag = login("91440300MA5DRRFB45", "10284784", result)
+            for i in range(30):
+                result1 = client.service.GetYZCode(md)
+                if result1 is not None:
+                    result1 = str(result1)
+                    return result1
+                time.sleep(10)
+            break
 
     def parse_pdf(self, pdf_path):
         fp = open(pdf_path, "rb")
@@ -182,13 +194,9 @@ class guoshui(object):
         return pdf_dict
 
     def login(self):
-        logger.info("开始登录")
         try_times = 0
-        while try_times <= 3:
+        while try_times <= 5:
             try_times += 1
-            login_url = 'http://dzswj.szgs.gov.cn/api/auth/clientWt'
-            timestamp = str(int(time.time() * 1000))
-            captcha_url = 'http://dzswj.szgs.gov.cn/JPEGServlet?d={}'.format(timestamp)
             session = requests.session()
             headers = {'Host': 'dzswj.szgs.gov.cn',
                        'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -198,28 +206,39 @@ class guoshui(object):
                        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
                        'x-form-id': 'mobile-signin-form',
                        'X-Requested-With': 'XMLHttpRequest',
-                       'Origin': 'http://dzswj.szgs.gov.cn'
-                       }
-            with open("captcha.jpg", "wb") as f:
-                f.write(session.get(url=captcha_url, headers=headers, timeout=10).content)
-                f.close()
-            tagger = self.captcha()
+                       'Origin': 'http://dzswj.szgs.gov.cn'}
+            session.get("http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/login/login.html", headers=headers)
+            captcha_url = 'http://dzswj.szgs.gov.cn/tipCaptcha'
+            tupian_resp = session.get(url=captcha_url, timeout=10)
+            tupian_resp.encoding = 'utf8'
+            tupian = tupian_resp.json()
+            image = tupian['image']
+            tipmessage = tupian["tipMessage"]
+            tupian = json.dumps(tupian, ensure_ascii=False)
+            m = hashlib.md5()
+            tupian1 = tupian.encode(encoding='utf8')
+            m.update(tupian1)
+            md = m.hexdigest()
+            print(md)
+            tag = self.tagger(tupian, md)
+            jyjg = session.post(url='http://dzswj.szgs.gov.cn/api/checkClickTipCaptcha', data=tag)
             time_l = time.localtime(int(time.time()))
             time_l = time.strftime("%Y-%m-%d %H:%M:%S", time_l)
-            pwd = self.jiami()
-            login_data = {"nsrsbh": self.user, "nsrpwd": pwd,
-                          "tagger": tagger, "redirectURL": "", "time": time_l}
-            resp = session.post(url=login_url, headers=headers, data=json.dumps(login_data), timeout=30)
-            if resp.json()['success'] == True:
+            tag = json.dumps(tag)
+            login_data = '{"nsrsbh":"%s","nsrpwd":"%s","redirectURL":"","tagger":%s,"time":"%s"}' % (
+            self.user, self.jiami(), tag, time_l)
+            login_url = 'http://dzswj.szgs.gov.cn/api/auth/clientWt'
+            resp = session.post(url=login_url, data=login_data)
+            panduan=resp.json()['message']
+            if "登录成功" in resp.json()['message']:
                 print('登录成功')
-                logger.info("登录成功")
                 cookies = {}
                 for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
                     cookies[k] = v
                 return cookies, session
-
             else:
-                logger.error("登录失败")
+                time.sleep(3)
+        return False
 
     def shuizhongchaxun(self, browser):
         browser.find_element_by_css_selector("#sz .mini-buttonedit-input").clear()
@@ -466,14 +485,27 @@ class guoshui(object):
 
     # 前往地税
     def qwdishui(self, browser):
-        logger.info("开始登录地税")
-        wait = ui.WebDriverWait(browser, 10)
-        wait.until(lambda browser: browser.find_element_by_css_selector("#mini-29 .mini-button-text"))
-        browser.find_element_by_css_selector("#mini-29 .mini-button-text").click()
-        browser.find_element_by_css_selector("#mini-27 .mini-button-text").click()
-        browser.find_element_by_xpath("//a[@href='javascript:gotoDs()']").click()
-        self.dishui(browser)
-
+        try_times=0
+        while try_times <=3:
+            ds_url = 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/djsxx/djsxx.html'
+            browser.get(url=ds_url)
+            logger.info("开始登录地税")
+            wait = ui.WebDriverWait(browser, 10)
+            try:
+                wait.until(lambda browser: browser.find_element_by_css_selector("#mini-29 .mini-button-text"))
+                browser.find_element_by_css_selector("#mini-29 .mini-button-text").click()
+            except:
+                print("无该弹窗")
+            try:
+                browser.find_element_by_css_selector("#mini-27 .mini-button-text").click()
+            except:
+                print("无该弹窗")
+            browser.find_element_by_xpath("//a[@href='javascript:gotoDs()']").click()
+            try:
+                self.dishui(browser)
+                return True
+            except:
+                try_times+=1
     def dishui(self, browser):
         logger.info("截取地税申报信息")
         time.sleep(2)
@@ -782,6 +814,8 @@ class guoshui(object):
                 jietulist.append(jietu)
                 for i in select:
                     jkxx = i.xpath('.//text()')
+                    if "没有符合条件的数据" in jkxx:
+                        break
                     pz = jkxx[0]
                     print(jkxx)
                     pz_l.append(pz)
@@ -1161,57 +1195,60 @@ class guoshui(object):
             logger.info("截取地税缴款信息已完成")
 
     def excute_spider(self):
-        cookies, session = self.login()
-        jsoncookies = json.dumps(cookies)
-        with open('cookies.json', 'w') as f:  # 将login后的cookies提取出来
-            f.write(jsoncookies)
-            f.close()
-        dcap = dict(DesiredCapabilities.PHANTOMJS)
-        dcap["phantomjs.page.settings.userAgent"] = (
-            'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
-        dcap["phantomjs.page.settings.loadImages"] = True
-        # browser = webdriver.PhantomJS(
-        #     executable_path='D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe',
-        #     desired_capabilities=dcap)
-        # browser = webdriver.PhantomJS(
-        # executable_path='/home/tool/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',
-        # desired_capabilities=dcap)
-        # browser.implicitly_wait(10)
-        # browser.viewportSize = {'width': 2200, 'height': 2200}
-        # browser.set_window_size(1400, 1600)  # Chrome无法使用这功能
-        browser = webdriver.Chrome(executable_path='D:/BaiduNetdiskDownload/chromedriver.exe')  # 添加driver的路径
-        index_url = "http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html"
-        browser.get(url=index_url)
-        browser.delete_all_cookies()
-        with open('cookies.json', 'r', encoding='utf8') as f:
-            cookielist = json.loads(f.read())
-        for (k, v) in cookielist.items():
-            browser.add_cookie({
-                'domain': '.szgs.gov.cn',  # 此处xxx.com前，需要带点
-                'name': k,
-                'value': v,
-                'path': '/',
-                'expires': None})
-        shenbao_url = 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/cxdy/sbcx.html'
-        browser.get(url="http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html")
-        browser.get(url=shenbao_url)
-        time.sleep(3)
-        self.shuizhongchaxun(browser)
+        try:
+            cookies, session = self.login()
+            jsoncookies = json.dumps(cookies)
+            with open('cookies.json', 'w') as f:  # 将login后的cookies提取出来
+                f.write(jsoncookies)
+                f.close()
+            dcap = dict(DesiredCapabilities.PHANTOMJS)
+            dcap["phantomjs.page.settings.userAgent"] = (
+                'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
+            dcap["phantomjs.page.settings.loadImages"] = True
+            # browser = webdriver.PhantomJS(
+            #     executable_path='D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe',
+            #     desired_capabilities=dcap)
+            browser = webdriver.PhantomJS(
+            executable_path='/home/tool/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',
+            desired_capabilities=dcap)
+            browser.implicitly_wait(10)
+            browser.viewportSize = {'width': 2200, 'height': 2200}
+            browser.set_window_size(1400, 1600)  # Chrome无法使用这功能
+            # browser = webdriver.Chrome(executable_path='D:/BaiduNetdiskDownload/chromedriver.exe')  # 添加driver的路径
+            index_url = "http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html"
+            browser.get(url=index_url)
+            browser.delete_all_cookies()
+            with open('cookies.json', 'r', encoding='utf8') as f:
+                cookielist = json.loads(f.read())
+            for (k, v) in cookielist.items():
+                browser.add_cookie({
+                    'domain': '.szgs.gov.cn',  # 此处xxx.com前，需要带点
+                    'name': k,
+                    'value': v,
+                    'path': '/',
+                    'expires': None})
+            shenbao_url = 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/cxdy/sbcx.html'
+            browser.get(url="http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html")
+            browser.get(url=shenbao_url)
+            time.sleep(3)
+            self.shuizhongchaxun(browser)
 
-        # 国税缴款查询
-        jk_url = 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/djsxx/jk_jsxxcx.html'
-        browser.get(url=jk_url)
-        self.parse_jiaokuan(browser)
-        #
-        # # 地税查询
-        ds_url = 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/djsxx/djsxx.html'
-        browser.get(url=ds_url)
-        self.qwdishui(browser)
-        job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '1', '成功爬取')
-        print("爬取完成")
-        logger.info("全部爬取完成")
-        browser.quit()
+            # 国税缴款查询
+            jk_url = 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/djsxx/jk_jsxxcx.html'
+            browser.get(url=jk_url)
+            self.parse_jiaokuan(browser)
+            #
+            # # 地税查询
 
+            self.qwdishui(browser)
+            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '1', '成功爬取')
+            print("爬取完成")
+            logger.info("全部爬取完成")
+            browser.quit()
+        except Exception as e:
+            logger.warn(e)
+            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', '爬取失败')
+            browser.quit()
 # start = time.time()
 # gs = guoshui(user="440300754285743", pwd="77766683", batchid=2017, batchmonth=4, batchyear=2017, companyid=18282900,
 #              customerid=13)
