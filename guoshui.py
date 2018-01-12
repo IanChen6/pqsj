@@ -350,7 +350,7 @@ class guoshui(object):
                 img_list = img_list + img_list3
                 logger.info("打印信息")
                 print(shuizhong)
-                logger.warn(shuizhong)
+                logger.info(shuizhong)
                 logger.info("开始插入数据库")
                 params = (
                     self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid,
@@ -565,7 +565,6 @@ class guoshui(object):
                 browser.find_element_by_css_selector('#query').click()
                 time.sleep(2)
                 grsd = self.save_png(browser, '{}/地税个人所得税已申报查询.png'.format(self.user))
-
                 # 表格信息爬取
                 content = browser.page_source
                 root = etree.HTML(content)
@@ -600,7 +599,6 @@ class guoshui(object):
                                              cookies=ck).text
                         pdf_content = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
                                                     cookies=ck).content
-
                         if "错误" not in resp:
                             with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
                                 w.write(pdf_content)
@@ -612,6 +610,75 @@ class guoshui(object):
                             None,
                             str(jsxx[2]), None,
                             str(jsxx[3]), None, None,
+                            self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
+                        logger.info(params)
+                        self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
+                        index += 1
+
+                # 企业所得税
+                browser.switch_to_default_content()
+                browser.switch_to_frame('qyIndex')
+                browser.switch_to_frame('qymain')
+                wait.until(lambda browser: browser.find_element_by_css_selector('#sbqq'))
+                browser.find_element_by_css_selector('#zsxmDm').find_element_by_xpath(
+                    '//option[@value="10104"]').click()  # 选择企业所得税
+                sb_startd = browser.find_element_by_css_selector('#sbqq')
+                sb_startd.clear()
+                sb_startd.send_keys(qsrq)
+                sb_endd = browser.find_element_by_css_selector('#sbqz')
+                sb_endd.clear()
+                sb_endd.send_keys(zzrq)
+                # time.sleep(1)
+                browser.find_element_by_css_selector('#query').click()
+                time.sleep(2)
+                qysd = self.save_png(browser, '{}/地税企业所得税已申报查询.png'.format(self.user))
+
+                # 表格信息爬取
+                content = browser.page_source
+                root = etree.HTML(content)
+                select = root.xpath('//table[@id="ysbjl_table"]/tbody/tr')
+                index = 0
+                pg = browser.page_source
+                if "没有" not in pg:
+                    for i in select:
+                        pdf_list = []
+                        pdf_list.append(qysd)
+                        browser.find_element_by_xpath(
+                            '//table[@id="ysbjl_table"]/tbody/tr[@data-index="{}"]//input[@name="btSelectItem"]'.format(
+                                index)).click()
+                        time.sleep(2)
+                        browser.find_element_by_css_selector('#print').click()
+                        # url=browser.find_element_by_name('sbbFormCj').get_attribute('action')
+                        jsxx = i.xpath('.//text()')
+                        pzxh = jsxx[0]
+                        print(jsxx)
+                        b_ck = browser.get_cookies()
+                        ck = {}
+                        for x in b_ck:
+                            ck[x['name']] = x['value']
+                        post_url = parse.urljoin("https://dzswj.szds.gov.cn",
+                                                 browser.find_element_by_name('sbbFormCj').get_attribute('action'))
+                        post_data = {'SubmitTokenTokenId': '', 'yzpzxhArray': pzxh, 'btSelectItem': 'on'}
+                        headers = {'Accept': 'application/json, text/javascript, */*; q=0.01',
+                                   'Accept-Language': 'zh-CN,zh;q=0.8',
+                                   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+                                   'X-Requested-With': 'XMLHttpRequest'}
+                        resp2 = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
+                                              cookies=ck).text
+                        pdf_content = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
+                                                    cookies=ck).content
+
+                        if "错误" not in resp2:
+                            with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
+                                w.write(pdf_content)
+                            pdf2 = self.upload_img("{}/申报表详情{}.pdf".format(self.user, pzxh))
+                            pdf_list.append(pdf2)
+
+                        params = (
+                            self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, str(pzxh),
+                            str(jsxx[1]),
+                            str(jsxx[2]),
+                            str(jsxx[3]), str(jsxx[4]), str(jsxx[5]), str(jsxx[6]), str(jsxx[7]),
                             self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
                         logger.info(params)
                         self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
@@ -693,74 +760,23 @@ class guoshui(object):
                         logger.info(params)
                         self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
                         index += 1
-                # 企业所得税
-                browser.switch_to_default_content()
-                browser.switch_to_frame('qyIndex')
-                browser.switch_to_frame('qymain')
-                wait.until(lambda browser: browser.find_element_by_css_selector('#sbqq'))
-                browser.find_element_by_css_selector('#zsxmDm').find_element_by_xpath(
-                    '//option[@value="10104"]').click()  # 选择企业所得税
-                sb_startd = browser.find_element_by_css_selector('#sbqq')
-                sb_startd.clear()
-                sb_startd.send_keys(qsrq)
-                sb_endd = browser.find_element_by_css_selector('#sbqz')
-                sb_endd.clear()
-                sb_endd.send_keys(zzrq)
-                # time.sleep(1)
-                browser.find_element_by_css_selector('#query').click()
-                time.sleep(2)
-                qysd = self.save_png(browser, '{}/地税企业所得税已申报查询.png'.format(self.user))
-
-                # 表格信息爬取
-                content = browser.page_source
-                root = etree.HTML(content)
-                select = root.xpath('//table[@id="ysbjl_table"]/tbody/tr')
-                index = 0
-                pg = browser.page_source
-                if "没有" not in pg:
-                    for i in select:
-                        pdf_list = []
-                        pdf_list.append(qysd)
-                        browser.find_element_by_xpath(
-                            '//table[@id="ysbjl_table"]/tbody/tr[@data-index="{}"]//input[@name="btSelectItem"]'.format(
-                                index)).click()
-                        time.sleep(2)
-                        browser.find_element_by_css_selector('#print').click()
-                        # url=browser.find_element_by_name('sbbFormCj').get_attribute('action')
-                        jsxx = i.xpath('.//text()')
-                        pzxh = jsxx[0]
-                        print(jsxx)
-                        b_ck = browser.get_cookies()
-                        ck = {}
-                        for x in b_ck:
-                            ck[x['name']] = x['value']
-                        post_url = parse.urljoin("https://dzswj.szds.gov.cn",
-                                                 browser.find_element_by_name('sbbFormCj').get_attribute('action'))
-                        post_data = {'SubmitTokenTokenId': '', 'yzpzxhArray': pzxh, 'btSelectItem': 'on'}
-                        headers = {'Accept': 'application/json, text/javascript, */*; q=0.01',
-                                   'Accept-Language': 'zh-CN,zh;q=0.8',
-                                   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
-                                   'X-Requested-With': 'XMLHttpRequest'}
-                        resp2 = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
-                                              cookies=ck).text
-                        pdf_content = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
-                                                    cookies=ck).content
-
-                        if "错误" not in resp2:
-                            with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
-                                w.write(pdf_content)
-                            pdf2 = self.upload_img("{}/申报表详情{}.pdf".format(self.user, pzxh))
-                            pdf_list.append(pdf2)
-
-                        params = (
-                            self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, str(pzxh),
-                            str(jsxx[1]),
-                            str(jsxx[2]),
-                            str(jsxx[3]), str(jsxx[4]), str(jsxx[5]), str(jsxx[6]), str(jsxx[7]),
-                            self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
-                        logger.info(params)
-                        self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
-                        index += 1
+                elif "没有" in pg:
+                    browser.switch_to_default_content()
+                    browser.find_element_by_css_selector('#menu_100000_102001').click()
+                    browser.switch_to_frame('qyIndex')
+                    wait.until(lambda browser: browser.find_element_by_css_selector("#menu3_3_102001"))
+                    browser.find_element_by_css_selector('#menu3_3_102001').click()
+                    browser.switch_to_frame('qymain')
+                    time.sleep(2)
+                    dspage = browser.page_source
+                    dsroot = etree.HTML(dspage)
+                    dsjudge = dsroot.xpath('//*[@id="tbody"]/tr')
+                    for i in dsjudge:
+                        xgm = i.xpath('.//text()')
+                        if '查无数据' in xgm:
+                            params = (
+                            self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, "", "")
+                            self.insert_db('[dbo].[Python_Serivce_DSTaxApplyShenZhen_NoDS3]', params)
                 logger.info("截取地税申报信息已完成")
         if self.wholeyear:
             for m in range(1, 13):
@@ -786,6 +802,7 @@ class guoshui(object):
                         browser.close()
                         browser.switch_to_window(dq)
                 browser.switch_to_default_content()
+                browser.find_element_by_css_selector('#menu_110000_110109').click()
                 browser.switch_to_frame('qyIndex')
                 browser.find_element_by_css_selector('#menu3_17_110204').click()
                 browser.switch_to_frame('qymain')
@@ -960,6 +977,74 @@ class guoshui(object):
                     self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
                     index += 1
 
+            # 企业所得税
+            browser.switch_to_default_content()
+            browser.switch_to_frame('qyIndex')
+            browser.switch_to_frame('qymain')
+            wait.until(lambda browser: browser.find_element_by_css_selector('#sbqq'))
+            browser.find_element_by_css_selector('#zsxmDm').find_element_by_xpath(
+                '//option[@value="10104"]').click()  # 选择企业所得税
+            sb_startd = browser.find_element_by_css_selector('#sbqq')
+            sb_startd.clear()
+            sb_startd.send_keys('{}-{}-01'.format(self.batchyear, self.batchmonth))
+            sb_endd = browser.find_element_by_css_selector('#sbqz')
+            sb_endd.clear()
+            sb_endd.send_keys('{}-{}-{}'.format(self.batchyear, self.batchmonth, self.days))
+            # time.sleep(1)
+            browser.find_element_by_css_selector('#query').click()
+            time.sleep(2)
+            qysd = self.save_png(browser, '{}/地税企业所得税已申报查询.png'.format(self.user))
+
+            # 表格信息爬取
+            content = browser.page_source
+            root = etree.HTML(content)
+            select = root.xpath('//table[@id="ysbjl_table"]/tbody/tr')
+            index = 0
+            pg = browser.page_source
+            if "没有" not in pg:
+                for i in select:
+                    pdf_list = []
+                    pdf_list.append(qysd)
+                    browser.find_element_by_xpath(
+                        '//table[@id="ysbjl_table"]/tbody/tr[@data-index="{}"]//input[@name="btSelectItem"]'.format(
+                            index)).click()
+                    time.sleep(2)
+                    browser.find_element_by_css_selector('#print').click()
+                    # url=browser.find_element_by_name('sbbFormCj').get_attribute('action')
+                    jsxx = i.xpath('.//text()')
+                    pzxh = jsxx[0]
+                    print(jsxx)
+                    b_ck = browser.get_cookies()
+                    ck = {}
+                    for x in b_ck:
+                        ck[x['name']] = x['value']
+                    post_url = parse.urljoin("https://dzswj.szds.gov.cn",
+                                             browser.find_element_by_name('sbbFormCj').get_attribute('action'))
+                    post_data = {'SubmitTokenTokenId': '', 'yzpzxhArray': pzxh, 'btSelectItem': 'on'}
+                    headers = {'Accept': 'application/json, text/javascript, */*; q=0.01',
+                               'Accept-Language': 'zh-CN,zh;q=0.8',
+                               'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+                               'X-Requested-With': 'XMLHttpRequest'}
+                    resp2 = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
+                                          cookies=ck).text
+                    pdf_content = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
+                                                cookies=ck).content
+
+                    if "错误" not in resp2:
+                        with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
+                            w.write(pdf_content)
+                        pdf2 = self.upload_img("{}/申报表详情{}.pdf".format(self.user, pzxh))
+                        pdf_list.append(pdf2)
+                    params = (
+                        self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, str(pzxh),
+                        str(jsxx[1]),
+                        str(jsxx[2]),
+                        str(jsxx[3]), str(jsxx[4]), str(jsxx[5]), str(jsxx[6]), str(jsxx[7]),
+                        self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
+                    logger.info(params)
+                    self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
+                    index += 1
+
             # 城市建设税
             browser.switch_to_default_content()
             browser.switch_to_frame('qyIndex')
@@ -1037,73 +1122,24 @@ class guoshui(object):
                     logger.info(params)
                     self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
                     index += 1
-            # 企业所得税
-            browser.switch_to_default_content()
-            browser.switch_to_frame('qyIndex')
-            browser.switch_to_frame('qymain')
-            wait.until(lambda browser: browser.find_element_by_css_selector('#sbqq'))
-            browser.find_element_by_css_selector('#zsxmDm').find_element_by_xpath(
-                '//option[@value="10104"]').click()  # 选择企业所得税
-            sb_startd = browser.find_element_by_css_selector('#sbqq')
-            sb_startd.clear()
-            sb_startd.send_keys('{}-{}-01'.format(self.batchyear, self.batchmonth))
-            sb_endd = browser.find_element_by_css_selector('#sbqz')
-            sb_endd.clear()
-            sb_endd.send_keys('{}-{}-{}'.format(self.batchyear, self.batchmonth, self.days))
-            # time.sleep(1)
-            browser.find_element_by_css_selector('#query').click()
-            time.sleep(2)
-            qysd = self.save_png(browser, '{}/地税企业所得税已申报查询.png'.format(self.user))
+            elif "没有" in pg:
+                browser.switch_to_default_content()
+                browser.find_element_by_css_selector('#menu_100000_102001').click()
+                browser.switch_to_frame('qyIndex')
+                wait.until(lambda browser: browser.find_element_by_css_selector("#menu3_3_102001"))
+                browser.find_element_by_css_selector('#menu3_3_102001').click()
+                browser.switch_to_frame('qymain')
+                time.sleep(2)
+                dspage = browser.page_source
+                dsroot = etree.HTML(dspage)
+                dsjudge = dsroot.xpath('//*[@id="tbody"]/tr')
+                for i in dsjudge:
+                    xgm = i.xpath('.//text()')
+                    if '查无数据' in xgm:
+                        params=(self.batchid,self.batchyear,self.batchmonth,self.companyid,self.customerid,"","")
+                        self.insert_db('[dbo].[Python_Serivce_DSTaxApplyShenZhen_NoDS3]',params)
 
-            # 表格信息爬取
-            content = browser.page_source
-            root = etree.HTML(content)
-            select = root.xpath('//table[@id="ysbjl_table"]/tbody/tr')
-            index = 0
-            pg = browser.page_source
-            if "没有" not in pg:
-                for i in select:
-                    pdf_list = []
-                    pdf_list.append(qysd)
-                    browser.find_element_by_xpath(
-                        '//table[@id="ysbjl_table"]/tbody/tr[@data-index="{}"]//input[@name="btSelectItem"]'.format(
-                            index)).click()
-                    time.sleep(2)
-                    browser.find_element_by_css_selector('#print').click()
-                    # url=browser.find_element_by_name('sbbFormCj').get_attribute('action')
-                    jsxx = i.xpath('.//text()')
-                    pzxh = jsxx[0]
-                    print(jsxx)
-                    b_ck = browser.get_cookies()
-                    ck = {}
-                    for x in b_ck:
-                        ck[x['name']] = x['value']
-                    post_url = parse.urljoin("https://dzswj.szds.gov.cn",
-                                             browser.find_element_by_name('sbbFormCj').get_attribute('action'))
-                    post_data = {'SubmitTokenTokenId': '', 'yzpzxhArray': pzxh, 'btSelectItem': 'on'}
-                    headers = {'Accept': 'application/json, text/javascript, */*; q=0.01',
-                               'Accept-Language': 'zh-CN,zh;q=0.8',
-                               'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
-                               'X-Requested-With': 'XMLHttpRequest'}
-                    resp2 = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
-                                          cookies=ck).text
-                    pdf_content = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
-                                                cookies=ck).content
 
-                    if "错误" not in resp2:
-                        with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
-                            w.write(pdf_content)
-                        pdf2 = self.upload_img("{}/申报表详情{}.pdf".format(self.user, pzxh))
-                        pdf_list.append(pdf2)
-                    params = (
-                        self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, str(pzxh),
-                        str(jsxx[1]),
-                        str(jsxx[2]),
-                        str(jsxx[3]), str(jsxx[4]), str(jsxx[5]), str(jsxx[6]), str(jsxx[7]),
-                        self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
-                    logger.info(params)
-                    self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
-                    index += 1
             logger.info("截取地税申报信息已完成")
             # 已缴款查询
             gbds = browser.window_handles
@@ -1113,8 +1149,8 @@ class guoshui(object):
                     browser.switch_to_window(s)
                     browser.close()
                     browser.switch_to_window(dq)
-
             browser.switch_to_default_content()
+            browser.find_element_by_css_selector('#menu_110000_110109').click()
             browser.switch_to_frame('qyIndex')
             browser.find_element_by_css_selector('#menu3_17_110204').click()
             browser.switch_to_frame('qymain')
