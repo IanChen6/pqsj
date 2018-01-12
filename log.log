@@ -110,3 +110,69 @@ Fri 12 Jan 2018 14:55:26 WARNING guoshui.py 1253 1288 13512 Message: 'phantomjs'
 
 Fri 12 Jan 2018 14:55:35 INFO tasks.py 35 1288 13512 something wrong during crawling
 Fri 12 Jan 2018 14:55:35 INFO tasks.py 35 1288 13512 something wrong during crawling
+Fri 12 Jan 2018 15:06:12 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:12 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:22 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:22 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:34 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:34 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:46 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:46 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:59 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:06:59 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:07:12 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:07:12 WARNING guoshui.py 244 2212 128 登录失败,重试
+Fri 12 Jan 2018 15:07:15 WARNING guoshui.py 1253 2212 128 'bool' object is not iterable
+Fri 12 Jan 2018 15:07:15 WARNING guoshui.py 1253 2212 128 'bool' object is not iterable
+Fri 12 Jan 2018 15:07:15 INFO tasks.py 35 2212 128 something wrong during crawling
+Fri 12 Jan 2018 15:07:15 INFO tasks.py 35 2212 128 something wrong during crawling
+Fri 12 Jan 2018 15:08:28 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:08:28 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:08:34 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:08:34 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:08:44 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:08:44 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:08:54 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:08:54 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:09:07 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:09:07 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:09:31 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:09:31 WARNING guoshui.py 244 6244 1824 登录失败,重试
+Fri 12 Jan 2018 15:09:41 WARNING guoshui.py 1253 6244 1824 'bool' object is not iterable
+Fri 12 Jan 2018 15:09:41 WARNING guoshui.py 1253 6244 1824 'bool' object is not iterable
+Fri 12 Jan 2018 15:15:31 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:15:31 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:15:40 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:15:40 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:15:55 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:15:55 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:16:03 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:16:03 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:16:10 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:16:10 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:16:18 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:16:18 WARNING guoshui.py 244 2136 10268 登录失败,重试
+Fri 12 Jan 2018 15:16:23 WARNING guoshui.py 1253 2136 10268 'bool' object is not iterable
+Fri 12 Jan 2018 15:16:23 WARNING guoshui.py 1253 2136 10268 'bool' object is not iterable
+Fri 12 Jan 2018 15:30:57 WARNING guoshui.py 244 364 14780 登录失败,重试
+Fri 12 Jan 2018 15:30:57 WARNING guoshui.py 244 364 14780 登录失败,重试
+Fri 12 Jan 2018 15:31:04 WARNING guoshui.py 244 364 14780 登录失败,重试
+Fri 12 Jan 2018 15:31:04 WARNING guoshui.py 244 364 14780 登录失败,重试
+Fri 12 Jan 2018 15:31:10 WARNING guoshui.py 244 364 14780 登录失败,重试
+Fri 12 Jan 2018 15:31:10 WARNING guoshui.py 244 364 14780 登录失败,重试
+Fri 12 Jan 2018 15:31:33 WARNING guoshui.py 1209 364 14780 <urlopen error [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。>
+Fri 12 Jan 2018 15:31:33 WARNING guoshui.py 1209 364 14780 <urlopen error [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。>
+Fri 12 Jan 2018 15:32:33 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:32:33 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:32:40 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:32:40 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:32:47 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:32:47 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:32:54 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:32:54 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:33:04 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:33:04 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:33:15 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:33:15 WARNING guoshui.py 244 14712 10296 登录失败,重试
+Fri 12 Jan 2018 15:33:19 WARNING guoshui.py 1209 14712 10296 'bool' object is not iterable
+Fri 12 Jan 2018 15:33:19 WARNING guoshui.py 1209 14712 10296 'bool' object is not iterable

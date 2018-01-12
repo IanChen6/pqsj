@@ -1205,6 +1205,11 @@ class guoshui(object):
             with open('cookies.json', 'w') as f:  # 将login后的cookies提取出来
                 f.write(jsoncookies)
                 f.close()
+        except Exception as e:
+            logger.warn(e)
+            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', "登录失败")
+            return False
+        try:
             dcap = dict(DesiredCapabilities.PHANTOMJS)
             dcap["phantomjs.page.settings.userAgent"] = (
                 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
@@ -1219,6 +1224,11 @@ class guoshui(object):
             browser.viewportSize = {'width': 2200, 'height': 2200}
             browser.set_window_size(1400, 1600)  # Chrome无法使用这功能
             # browser = webdriver.Chrome(executable_path='D:/BaiduNetdiskDownload/chromedriver.exe')  # 添加driver的路径
+        except Exception as e:
+            logger.warn(e)
+            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', "浏览器启动失败")
+            return False
+        try:
             index_url = "http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html"
             browser.get(url=index_url)
             browser.delete_all_cookies()
@@ -1236,14 +1246,23 @@ class guoshui(object):
             browser.get(url=shenbao_url)
             time.sleep(3)
             self.shuizhongchaxun(browser)
-
+        except Exception as e:
+            logger.warn(e)
+            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', "国税已申报查询失败")
+            browser.quit()
+            return False
+        try:
             # 国税缴款查询
             jk_url = 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/djsxx/jk_jsxxcx.html'
             browser.get(url=jk_url)
             self.parse_jiaokuan(browser)
-            #
-            # # 地税查询
-
+        except Exception as e:
+            logger.warn(e)
+            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', "国税已缴款查询失败")
+            browser.quit()
+            return False
+        try:
+            # 地税查询
             self.qwdishui(browser)
             job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '1', '成功爬取')
             print("爬取完成")
@@ -1251,7 +1270,7 @@ class guoshui(object):
             browser.quit()
         except Exception as e:
             logger.warn(e)
-            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', e)
+            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', "地税查询失败")
             browser.quit()
 # start = time.time()
 # gs = guoshui(user="440300754285743", pwd="77766683", batchid=2017, batchmonth=4, batchyear=2017, companyid=18282900,
