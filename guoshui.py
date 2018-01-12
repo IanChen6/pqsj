@@ -335,7 +335,7 @@ class guoshui(object):
             content = browser.page_source
             root = etree.HTML(content)
             select = root.xpath('//table[@id="mini-grid-table-bodysbqkGrid"]/tbody/tr')
-            a = -1
+            a = 1
             for i in select[1:]:
                 shuizhong = i.xpath('.//text()')
                 a += 1
@@ -365,11 +365,7 @@ class guoshui(object):
 
     # 申报表截图
     def parse_shenbaobiao(self, browser, a, month):
-        try:
-            browser.find_element_by_xpath('//*[@id="mini-25${}"]//a[1]'.format(a)).click()
-        except:
-            a=a+1
-            browser.find_element_by_xpath('//*[@id="mini-25${}"]//a[1]'.format(a)).click()
+        browser.find_element_by_xpath('//table[@id="mini-grid-table-bodysbqkGrid"]/tbody/tr[%s]//a[1]'%(a,)).click()
         try:
             logger.info("申报表截图")
             wait = ui.WebDriverWait(browser, 5)

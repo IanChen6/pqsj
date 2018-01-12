@@ -176,3 +176,57 @@ Fri 12 Jan 2018 15:33:15 WARNING guoshui.py 244 14712 10296 登录失败,重试
 Fri 12 Jan 2018 15:33:15 WARNING guoshui.py 244 14712 10296 登录失败,重试
 Fri 12 Jan 2018 15:33:19 WARNING guoshui.py 1209 14712 10296 'bool' object is not iterable
 Fri 12 Jan 2018 15:33:19 WARNING guoshui.py 1209 14712 10296 'bool' object is not iterable
+Fri 12 Jan 2018 21:32:23 INFO guoshui.py 264 10856 6192 截取国税增值税申报信息
+Fri 12 Jan 2018 21:32:23 INFO guoshui.py 264 10856 6192 截取国税增值税申报信息
+Fri 12 Jan 2018 21:32:26 INFO guoshui.py 364 10856 6192 截取国税申报信息已完成
+Fri 12 Jan 2018 21:32:26 INFO guoshui.py 364 10856 6192 截取国税申报信息已完成
+Fri 12 Jan 2018 21:32:35 INFO guoshui.py 264 10856 6192 截取国税财务报表申报信息
+Fri 12 Jan 2018 21:32:35 INFO guoshui.py 264 10856 6192 截取国税财务报表申报信息
+Fri 12 Jan 2018 21:32:38 INFO guoshui.py 364 10856 6192 截取国税申报信息已完成
+Fri 12 Jan 2018 21:32:38 INFO guoshui.py 364 10856 6192 截取国税申报信息已完成
+Fri 12 Jan 2018 21:32:46 INFO guoshui.py 264 10856 6192 截取国税所得税申报信息
+Fri 12 Jan 2018 21:32:46 INFO guoshui.py 264 10856 6192 截取国税所得税申报信息
+Fri 12 Jan 2018 21:32:49 INFO guoshui.py 364 10856 6192 截取国税申报信息已完成
+Fri 12 Jan 2018 21:32:49 INFO guoshui.py 364 10856 6192 截取国税申报信息已完成
+Fri 12 Jan 2018 21:39:13 WARNING guoshui.py 244 13364 17264 登录失败,重试
+Fri 12 Jan 2018 21:39:13 WARNING guoshui.py 244 13364 17264 登录失败,重试
+Fri 12 Jan 2018 21:40:34 INFO guoshui.py 264 13364 17264 截取国税增值税申报信息
+Fri 12 Jan 2018 21:40:34 INFO guoshui.py 264 13364 17264 截取国税增值税申报信息
+Fri 12 Jan 2018 21:40:37 INFO guoshui.py 346 13364 17264 有申报表需要查询
+Fri 12 Jan 2018 21:40:37 INFO guoshui.py 346 13364 17264 有申报表需要查询
+Fri 12 Jan 2018 21:41:11 INFO guoshui.py 1289 13364 17264 GSYCX出错
+Fri 12 Jan 2018 21:41:11 INFO guoshui.py 1289 13364 17264 GSYCX出错
+Fri 12 Jan 2018 21:41:11 WARNING guoshui.py 1290 13364 17264 Message: {"errorMessage":"Unable to find element with xpath '//tr[@class=\"mini-grid-row\"][1]//a[1]'","request":{"headers":{"Accept":"application/json","Accept-Encoding":"identity","Connection":"close","Content-Length":"123","Content-Type":"application/json;charset=UTF-8","Host":"127.0.0.1:54827","User-Agent":"Python http auth"},"httpVersion":"1.1","method":"POST","post":"{\"sessionId\": \"22f6e9f0-f79e-11e7-bb29-f5715aff7cf5\", \"using\": \"xpath\", \"value\": \"//tr[@class=\\\"mini-grid-row\\\"][1]//a[1]\"}","url":"/element","urlParsed":{"anchor":"","query":"","file":"element","directory":"/","path":"/element","relative":"/element","port":"","host":"","password":"","user":"","userInfo":"","authority":"","protocol":"","source":"/element","queryKey":{},"chunks":["element"]},"urlOriginal":"/session/22f6e9f0-f79e-11e7-bb29-f5715aff7cf5/element"}}
+Screenshot: available via screen
+
+Fri 12 Jan 2018 21:41:11 WARNING guoshui.py 1290 13364 17264 Message: {"errorMessage":"Unable to find element with xpath '//tr[@class=\"mini-grid-row\"][1]//a[1]'","request":{"headers":{"Accept":"application/json","Accept-Encoding":"identity","Connection":"close","Content-Length":"123","Content-Type":"application/json;charset=UTF-8","Host":"127.0.0.1:54827","User-Agent":"Python http auth"},"httpVersion":"1.1","method":"POST","post":"{\"sessionId\": \"22f6e9f0-f79e-11e7-bb29-f5715aff7cf5\", \"using\": \"xpath\", \"value\": \"//tr[@class=\\\"mini-grid-row\\\"][1]//a[1]\"}","url":"/element","urlParsed":{"anchor":"","query":"","file":"element","directory":"/","path":"/element","relative":"/element","port":"","host":"","password":"","user":"","userInfo":"","authority":"","protocol":"","source":"/element","queryKey":{},"chunks":["element"]},"urlOriginal":"/session/22f6e9f0-f79e-11e7-bb29-f5715aff7cf5/element"}}
+Screenshot: available via screen
+
+Fri 12 Jan 2018 21:41:11 INFO guoshui.py 1291 13364 17264 国税已申报查询失败
+Fri 12 Jan 2018 21:41:11 INFO guoshui.py 1291 13364 17264 国税已申报查询失败
+Fri 12 Jan 2018 21:44:56 INFO guoshui.py 264 8308 1904 截取国税增值税申报信息
+Fri 12 Jan 2018 21:44:56 INFO guoshui.py 264 8308 1904 截取国税增值税申报信息
+Fri 12 Jan 2018 21:45:01 INFO guoshui.py 346 8308 1904 有申报表需要查询
+Fri 12 Jan 2018 21:45:01 INFO guoshui.py 346 8308 1904 有申报表需要查询
+Fri 12 Jan 2018 21:46:38 INFO guoshui.py 264 15228 14512 截取国税增值税申报信息
+Fri 12 Jan 2018 21:46:38 INFO guoshui.py 264 15228 14512 截取国税增值税申报信息
+Fri 12 Jan 2018 21:46:41 INFO guoshui.py 346 15228 14512 有申报表需要查询
+Fri 12 Jan 2018 21:46:41 INFO guoshui.py 346 15228 14512 有申报表需要查询
+Fri 12 Jan 2018 21:50:17 INFO guoshui.py 264 2600 15116 截取国税增值税申报信息
+Fri 12 Jan 2018 21:50:17 INFO guoshui.py 264 2600 15116 截取国税增值税申报信息
+Fri 12 Jan 2018 21:50:20 INFO guoshui.py 346 2600 15116 有申报表需要查询
+Fri 12 Jan 2018 21:50:20 INFO guoshui.py 346 2600 15116 有申报表需要查询
+Fri 12 Jan 2018 21:50:42 INFO guoshui.py 1289 2600 15116 GSYCX出错
+Fri 12 Jan 2018 21:50:42 INFO guoshui.py 1289 2600 15116 GSYCX出错
+Fri 12 Jan 2018 21:50:43 WARNING guoshui.py 1290 2600 15116 Message: {"errorMessage":"Unable to locate an element with the xpath expression //table[@id=\"mini-grid-table-bodysbqkGrid\"]/tbody/tr[{2}]//a[1] because of the following error:\nError: INVALID_EXPRESSION_ERR: DOM XPath Exception 51","request":{"headers":{"Accept":"application/json","Accept-Encoding":"identity","Connection":"close","Content-Length":"149","Content-Type":"application/json;charset=UTF-8","Host":"127.0.0.1:56034","User-Agent":"Python http auth"},"httpVersion":"1.1","method":"POST","post":"{\"sessionId\": \"7d275580-f79f-11e7-8e1d-63deae078f7a\", \"using\": \"xpath\", \"value\": \"//table[@id=\\\"mini-grid-table-bodysbqkGrid\\\"]/tbody/tr[{2}]//a[1]\"}","url":"/element","urlParsed":{"anchor":"","query":"","file":"element","directory":"/","path":"/element","relative":"/element","port":"","host":"","password":"","user":"","userInfo":"","authority":"","protocol":"","source":"/element","queryKey":{},"chunks":["element"]},"urlOriginal":"/session/7d275580-f79f-11e7-8e1d-63deae078f7a/element"}}
+Screenshot: available via screen
+
+Fri 12 Jan 2018 21:50:43 WARNING guoshui.py 1290 2600 15116 Message: {"errorMessage":"Unable to locate an element with the xpath expression //table[@id=\"mini-grid-table-bodysbqkGrid\"]/tbody/tr[{2}]//a[1] because of the following error:\nError: INVALID_EXPRESSION_ERR: DOM XPath Exception 51","request":{"headers":{"Accept":"application/json","Accept-Encoding":"identity","Connection":"close","Content-Length":"149","Content-Type":"application/json;charset=UTF-8","Host":"127.0.0.1:56034","User-Agent":"Python http auth"},"httpVersion":"1.1","method":"POST","post":"{\"sessionId\": \"7d275580-f79f-11e7-8e1d-63deae078f7a\", \"using\": \"xpath\", \"value\": \"//table[@id=\\\"mini-grid-table-bodysbqkGrid\\\"]/tbody/tr[{2}]//a[1]\"}","url":"/element","urlParsed":{"anchor":"","query":"","file":"element","directory":"/","path":"/element","relative":"/element","port":"","host":"","password":"","user":"","userInfo":"","authority":"","protocol":"","source":"/element","queryKey":{},"chunks":["element"]},"urlOriginal":"/session/7d275580-f79f-11e7-8e1d-63deae078f7a/element"}}
+Screenshot: available via screen
+
+Fri 12 Jan 2018 21:52:27 INFO guoshui.py 264 5080 4956 截取国税增值税申报信息
+Fri 12 Jan 2018 21:52:27 INFO guoshui.py 264 5080 4956 截取国税增值税申报信息
+Fri 12 Jan 2018 21:52:30 INFO guoshui.py 346 5080 4956 有申报表需要查询
+Fri 12 Jan 2018 21:52:30 INFO guoshui.py 346 5080 4956 有申报表需要查询
+Fri 12 Jan 2018 21:52:34 INFO guoshui.py 370 5080 4956 申报表截图
+Fri 12 Jan 2018 21:52:34 INFO guoshui.py 370 5080 4956 申报表截图
