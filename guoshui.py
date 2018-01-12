@@ -365,8 +365,11 @@ class guoshui(object):
 
     # 申报表截图
     def parse_shenbaobiao(self, browser, a, month):
-        browser.find_element_by_xpath('//*[@id="mini-25${}"]//a[1]'.format(a)).click()
-
+        try:
+            browser.find_element_by_xpath('//*[@id="mini-25${}"]//a[1]'.format(a)).click()
+        except:
+            a=a+1
+            browser.find_element_by_xpath('//*[@id="mini-25${}"]//a[1]'.format(a)).click()
         try:
             logger.info("申报表截图")
             wait = ui.WebDriverWait(browser, 5)
