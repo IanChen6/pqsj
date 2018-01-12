@@ -231,14 +231,17 @@ class guoshui(object):
             login_url = 'http://dzswj.szgs.gov.cn/api/auth/clientWt'
             resp = session.post(url=login_url, data=login_data)
             panduan=resp.json()['message']
-            if "登录成功" in resp.json()['message']:
-                print('登录成功')
-                cookies = {}
-                for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
-                    cookies[k] = v
-                return cookies, session
+            if "验证码正确" in jyjg.json()['message']:
+                if "登录成功" in resp.json()['message']:
+                    print('登录成功')
+                    cookies = {}
+                    for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
+                        cookies[k] = v
+                    return cookies, session
+                else:
+                    time.sleep(3)
             else:
-                time.sleep(3)
+                logger.warn("登录失败,重试")
         return False
 
     def shuizhongchaxun(self, browser):
@@ -1248,7 +1251,7 @@ class guoshui(object):
             browser.quit()
         except Exception as e:
             logger.warn(e)
-            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', '爬取失败')
+            job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', e)
             browser.quit()
 # start = time.time()
 # gs = guoshui(user="440300754285743", pwd="77766683", batchid=2017, batchmonth=4, batchyear=2017, companyid=18282900,
