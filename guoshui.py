@@ -1287,7 +1287,9 @@ class guoshui(object):
             time.sleep(3)
             self.shuizhongchaxun(browser)
         except Exception as e:
+            logger.info("GSYCX出错")
             logger.warn(e)
+            logger.info("国税已申报查询失败")
             job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', "国税已申报查询失败")
             browser.quit()
             return False
