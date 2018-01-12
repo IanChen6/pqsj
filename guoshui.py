@@ -461,7 +461,11 @@ class guoshui(object):
             browser.find_element_by_css_selector("#sssqz .mini-buttonedit-input").clear()
             browser.find_element_by_css_selector("#sssqz .mini-buttonedit-input").send_keys(
                 '{}{}{}'.format(self.batchyear, self.batchmonth, self.days))
-            browser.find_element_by_css_selector("#mini-37 .mini-button-text").click()
+            try:
+                browser.find_element_by_css_selector("#mini-37 .mini-button-text").click()
+            except Exception as e:
+                logger.warn(e)
+                print("没有弹窗")
             wait = ui.WebDriverWait(browser, 10)
             wait.until(lambda browser: browser.find_element_by_css_selector("#stepnext .mini-button-text"))
             browser.find_element_by_css_selector("#stepnext .mini-button-text").click()
