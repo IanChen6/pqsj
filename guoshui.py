@@ -142,6 +142,7 @@ class guoshui(object):
                     result1 = str(result1)
                     return result1
                 time.sleep(10)
+            self.insert_db("[dbo].[Python_Serivce_Job_Expire]",(self.batchid,self.customerid))
             break
 
     def parse_pdf(self, pdf_path):
