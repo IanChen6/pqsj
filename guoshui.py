@@ -199,9 +199,9 @@ class guoshui(object):
         while try_times <= 5:
             try_times += 1
             session = requests.session()
-            proxy_list = get_all_proxie()
-            proxy = proxy_list[random.randint(0, len(proxy_list) - 1)]
-            session.proxies = proxy
+            # proxy_list = get_all_proxie()
+            # proxy = proxy_list[random.randint(0, len(proxy_list) - 1)]
+            session.proxies = {'https': 'http://116.22.211.55:6897', 'http': 'http://116.22.211.55:6897'}
             headers = {'Host': 'dzswj.szgs.gov.cn',
                        'Accept': 'application/json, text/javascript, */*; q=0.01',
                        'Accept-Language': 'zh-CN,zh;q=0.8',

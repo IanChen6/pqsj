@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be93bd86-aa2f-42d7-9157-c290b2f33891" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/proxy_ceshi.py" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/guoshui.py" afterPath="$PROJECT_DIR$/guoshui.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +20,8 @@
       <file leaf-file-name="guoshui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guoshui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="202" column="37" lean-forward="false" selection-start-line="202" selection-start-column="31" selection-end-line="202" selection-end-column="37" />
+            <state relative-caret-position="314">
+              <caret line="197" column="21" lean-forward="true" selection-start-line="197" selection-start-column="21" selection-end-line="197" selection-end-column="21" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
               </folding>
@@ -103,9 +101,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="7" />
-    <option name="y" value="77" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="220" />
+    <option name="y" value="102" />
     <option name="width" value="1735" />
     <option name="height" value="983" />
   </component>
@@ -229,7 +227,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="7" y="77" width="1735" height="983" extended-state="1" />
+    <frame x="220" y="102" width="1735" height="983" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -636,8 +634,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guoshui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="202" column="37" lean-forward="false" selection-start-line="202" selection-start-column="31" selection-end-line="202" selection-end-column="37" />
+        <state relative-caret-position="314">
+          <caret line="197" column="21" lean-forward="true" selection-start-line="197" selection-start-column="21" selection-end-line="197" selection-end-column="21" />
           <folding>
             <element signature="e#23#38#0" expanded="true" />
           </folding>
