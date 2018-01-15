@@ -222,6 +222,7 @@ class guoshui(object):
 
     def login(self):
         try_times = 0
+        logger.info('{}开始尝试登陆'.format(self.customerid))
         while try_times <= 10:
             try_times += 1
             session = requests.session()
@@ -264,6 +265,7 @@ class guoshui(object):
             if "验证码正确" in jyjg.json()['message']:
                 if "登录成功" in resp.json()['message']:
                     print('登录成功')
+                    logger.info('{}pass'.format(self.customerid))
                     cookies = {}
                     for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
                         cookies[k] = v
@@ -274,6 +276,7 @@ class guoshui(object):
                 logger.warn("{}登录失败,重试".format(self.customerid))
         try_times=0
         while try_times <= 3:
+            logger.info("{}手动登陆".format())
             try_times += 1
             session = requests.session()
             # proxy_list = get_all_proxie()
@@ -323,6 +326,7 @@ class guoshui(object):
                     time.sleep(3)
             else:
                 logger.warn("{}登录失败,重试".format(self.customerid))
+        logger.warn("{}登陆失败".format(self.customerid))
         return False
 
     def shuizhongchaxun(self, browser):
