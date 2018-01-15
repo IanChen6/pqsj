@@ -123,24 +123,52 @@ class guoshui(object):
         img = self.upload_img(path)
         return img
 
+    def taggertwo(self,tupian, md):
+        while True:
+            # formdata = {'CompanyID': 123456, 'BatchID': "1215454545", 'JobName': "pyj", 'CodeMD5': md, 'CodeData': tupian}
+            # resp=requests.get(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl",data=formdata)
+            try:
+                client = suds.client.Client(url="http://39.108.112.203:8701/SZYZService.asmx?wsdl")
+                # client = suds.client.Client(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl")
+                # auto = client.service.GetYZCodeForDll(tupian)
+                # if auto is not None:
+                #     result1 = str(auto)
+                #     return result1
+                result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
+                # flag = login("91440300MA5DRRFB45", "10284784", result)
+                for i in range(30):
+                    result1 = client.service.GetYZCode(md)
+                    if result1 is not None:
+                        result1 = str(result1)
+                        return result1
+                    time.sleep(10)
+            except Exception as e:
+                logger.warn(e)
+            self.insert_db("[dbo].[Python_Serivce_Job_Expire]",(self.batchid,self.customerid))
+            break
+
+
     def tagger(self,tupian, md):
         while True:
             # formdata = {'CompanyID': 123456, 'BatchID': "1215454545", 'JobName': "pyj", 'CodeMD5': md, 'CodeData': tupian}
             # resp=requests.get(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl",data=formdata)
-            client = suds.client.Client(url="http://39.108.112.203:8701/SZYZService.asmx?wsdl")
-            # client = suds.client.Client(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl")
-            auto = client.service.GetYZCodeForDll(tupian)
-            if auto is not None:
-                result1 = str(auto)
-                return result1
-            result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
-            # flag = login("91440300MA5DRRFB45", "10284784", result)
-            for i in range(30):
-                result1 = client.service.GetYZCode(md)
-                if result1 is not None:
-                    result1 = str(result1)
+            try:
+                client = suds.client.Client(url="http://39.108.112.203:8701/SZYZService.asmx?wsdl")
+                # client = suds.client.Client(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl")
+                auto = client.service.GetYZCodeForDll(tupian)
+                if auto is not None:
+                    result1 = str(auto)
                     return result1
-                time.sleep(10)
+                result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
+                # flag = login("91440300MA5DRRFB45", "10284784", result)
+                for i in range(30):
+                    result1 = client.service.GetYZCode(md)
+                    if result1 is not None:
+                        result1 = str(result1)
+                        return result1
+                    time.sleep(10)
+            except Exception as e:
+                logger.warn(e)
             self.insert_db("[dbo].[Python_Serivce_Job_Expire]",(self.batchid,self.customerid))
             break
 
@@ -195,7 +223,7 @@ class guoshui(object):
 
     def login(self):
         try_times = 0
-        while try_times <= 5:
+        while try_times <= 10:
             try_times += 1
             session = requests.session()
             # proxy_list = get_all_proxie()
@@ -245,6 +273,57 @@ class guoshui(object):
                     time.sleep(3)
             else:
                 logger.warn("登录失败,重试")
+        while try_times <= 3:
+            try_times += 1
+            session = requests.session()
+            # proxy_list = get_all_proxie()
+            # proxy = proxy_list[random.randint(0, len(proxy_list) - 1)]
+            session.proxies = sys.argv[1]
+            # session.proxies = {'https': 'http://116.22.211.55:6897', 'http': 'http://116.22.211.55:6897'}
+            headers = {'Host': 'dzswj.szgs.gov.cn',
+                       'Accept': 'application/json, text/javascript, */*; q=0.01',
+                       'Accept-Language': 'zh-CN,zh;q=0.8',
+                       'Content-Type': 'application/json; charset=UTF-8',
+                       'Referer': 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/login/login.html',
+                       'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+                       'x-form-id': 'mobile-signin-form',
+                       'X-Requested-With': 'XMLHttpRequest',
+                       'Origin': 'http://dzswj.szgs.gov.cn'}
+            session.get("http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/login/login.html", headers=headers)
+            captcha_url = 'http://dzswj.szgs.gov.cn/tipCaptcha'
+            tupian_resp = session.get(url=captcha_url, timeout=10)
+            tupian_resp.encoding = 'utf8'
+            tupian = tupian_resp.json()
+            image = tupian['image']
+            tipmessage = tupian["tipMessage"]
+            tupian = json.dumps(tupian, ensure_ascii=False)
+            m = hashlib.md5()
+            tupian1 = tupian.encode(encoding='utf8')
+            m.update(tupian1)
+            md = m.hexdigest()
+            print(md)
+            tag = self.taggertwo(tupian, md)
+            jyjg = session.post(url='http://dzswj.szgs.gov.cn/api/checkClickTipCaptcha', data=tag)
+            time_l = time.localtime(int(time.time()))
+            time_l = time.strftime("%Y-%m-%d %H:%M:%S", time_l)
+            tag = json.dumps(tag)
+            login_data = '{"nsrsbh":"%s","nsrpwd":"%s","redirectURL":"","tagger":%s,"time":"%s"}' % (
+            self.user, self.jiami(), tag, time_l)
+            login_url = 'http://dzswj.szgs.gov.cn/api/auth/clientWt'
+            resp = session.post(url=login_url, data=login_data)
+            panduan=resp.json()['message']
+            if "验证码正确" in jyjg.json()['message']:
+                if "登录成功" in resp.json()['message']:
+                    print('登录成功')
+                    cookies = {}
+                    for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
+                        cookies[k] = v
+                    return cookies, session
+                else:
+                    time.sleep(3)
+            else:
+                logger.warn("登录失败,重试")
+
         return False
 
     def shuizhongchaxun(self, browser):
