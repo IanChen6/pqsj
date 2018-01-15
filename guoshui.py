@@ -35,7 +35,7 @@ import hashlib
 from log_ging.log_01 import *
 from get_db import job_finish
 from get_db import get_db
-
+import sys
 #
 logger = create_logger()
 
@@ -129,11 +129,11 @@ class guoshui(object):
             # resp=requests.get(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl",data=formdata)
             client = suds.client.Client(url="http://39.108.112.203:8701/SZYZService.asmx?wsdl")
             # client = suds.client.Client(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl")
-            auto = client.service.GetYZCodeForDll(tupian)
-            if auto is not None:
-                tagger = str(auto)
-                flag = self.login()
-                break
+            # auto = client.service.GetYZCodeForDll(tupian)
+            # if auto is not None:
+            #     tagger = str(auto)
+            #     flag = self.login()
+            #     break
             result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
             # flag = login("91440300MA5DRRFB45", "10284784", result)
             for i in range(30):
@@ -201,7 +201,8 @@ class guoshui(object):
             session = requests.session()
             # proxy_list = get_all_proxie()
             # proxy = proxy_list[random.randint(0, len(proxy_list) - 1)]
-            session.proxies = {'https': 'http://116.22.211.55:6897', 'http': 'http://116.22.211.55:6897'}
+            session.proxies = sys.argv[1]
+            # session.proxies = {'https': 'http://116.22.211.55:6897', 'http': 'http://116.22.211.55:6897'}
             headers = {'Host': 'dzswj.szgs.gov.cn',
                        'Accept': 'application/json, text/javascript, */*; q=0.01',
                        'Accept-Language': 'zh-CN,zh;q=0.8',
@@ -1256,12 +1257,12 @@ class guoshui(object):
             dcap["phantomjs.page.settings.userAgent"] = (
                 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
             dcap["phantomjs.page.settings.loadImages"] = True
-            # browser = webdriver.PhantomJS(
-            #     executable_path='D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe',
-            #     desired_capabilities=dcap)
             browser = webdriver.PhantomJS(
-            executable_path='/home/tool/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',
-            desired_capabilities=dcap)
+                executable_path='D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe',
+                desired_capabilities=dcap)
+            # browser = webdriver.PhantomJS(
+            # executable_path='/home/tool/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',
+            # desired_capabilities=dcap)
             browser.implicitly_wait(10)
             browser.viewportSize = {'width': 2200, 'height': 2200}
             browser.set_window_size(1400, 1600)  # Chrome无法使用这功能
