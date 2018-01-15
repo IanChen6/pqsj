@@ -129,11 +129,10 @@ class guoshui(object):
             # resp=requests.get(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl",data=formdata)
             client = suds.client.Client(url="http://39.108.112.203:8701/SZYZService.asmx?wsdl")
             # client = suds.client.Client(url="http://192.168.18.101:1421/SZYZService.asmx?wsdl")
-            # auto = client.service.GetYZCodeForDll(tupian)
-            # if auto is not None:
-            #     tagger = str(auto)
-            #     flag = self.login()
-            #     break
+            auto = client.service.GetYZCodeForDll(tupian)
+            if auto is not None:
+                result1 = str(auto)
+                return result1
             result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
             # flag = login("91440300MA5DRRFB45", "10284784", result)
             for i in range(30):
