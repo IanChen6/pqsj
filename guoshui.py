@@ -222,8 +222,8 @@ class guoshui(object):
 
     def login(self):
         try_times = 0
-        logger.info('customerid:{},开始尝试登陆'.format(self.customerid))
         while try_times <= 10:
+            logger.info('customerid:{},开始尝试登陆'.format(self.customerid))
             try_times += 1
             session = requests.session()
             # proxy_list = get_all_proxie()
@@ -253,7 +253,9 @@ class guoshui(object):
             md = m.hexdigest()
             print(md)
             tag = self.tagger(tupian, md)
+            logger.info("customerid:{}，获取验证码为：{}".format(self.customerid,tag))
             jyjg = session.post(url='http://dzswj.szgs.gov.cn/api/checkClickTipCaptcha', data=tag)
+            logger.info("customerid:{}，验证验证码{}".format(self.customerid,tag))
             time_l = time.localtime(int(time.time()))
             time_l = time.strftime("%Y-%m-%d %H:%M:%S", time_l)
             tag = json.dumps(tag)
@@ -261,6 +263,7 @@ class guoshui(object):
             self.user, self.jiami(), tag, time_l)
             login_url = 'http://dzswj.szgs.gov.cn/api/auth/clientWt'
             resp = session.post(url=login_url, data=login_data)
+            logger.info("customerid:{},成功post数据")
             panduan=resp.json()['message']
             if "验证码正确" in jyjg.json()['message']:
                 if "登录成功" in resp.json()['message']:
@@ -1331,6 +1334,7 @@ class guoshui(object):
                 f.close()
         except Exception as e:
             logger.warn(e)
+            logger.warn("customerid:{}登陆失败".format(self.customerid))
             job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', "登录失败")
             return False
         try:
