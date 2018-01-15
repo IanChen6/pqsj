@@ -252,6 +252,7 @@ class guoshui(object):
             m.update(tupian1)
             md = m.hexdigest()
             print(md)
+            logger.info("customerid:{},:{}".format(tupian))
             tag = self.tagger(tupian, md)
             logger.info("customerid:{}，获取验证码为：{}".format(self.customerid,tag))
             jyjg = session.post(url='http://dzswj.szgs.gov.cn/api/checkClickTipCaptcha', data=tag)
