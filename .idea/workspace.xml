@@ -20,8 +20,8 @@
       <file leaf-file-name="guoshui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guoshui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-57">
-              <caret line="302" column="30" lean-forward="true" selection-start-line="302" selection-start-column="30" selection-end-line="302" selection-end-column="30" />
+            <state relative-caret-position="293">
+              <caret line="1393" column="30" lean-forward="true" selection-start-line="1393" selection-start-column="30" selection-end-line="1393" selection-end-column="30" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
               </folding>
@@ -54,7 +54,7 @@
       <file leaf-file-name="log_01.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/log_ging/log_01.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="113">
               <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
               <folding />
             </state>
@@ -89,6 +89,8 @@
       <find>25</find>
       <find>random</find>
       <find>excute</find>
+      <find>log</find>
+      <find>logger</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -142,6 +144,11 @@
             <path>
               <item name="pqsj" type="b2602c69:ProjectViewProjectNode" />
               <item name="pqsj" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pqsj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pqsj" type="462c0819:PsiDirectoryNode" />
+              <item name="log_ging" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -609,14 +616,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/captcha.jpg" />
-    <entry file="file://$PROJECT_DIR$/log_ging/log_01.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proxy_ceshi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -645,10 +644,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/log_ging/log_01.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/guoshui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="302" column="30" lean-forward="true" selection-start-line="302" selection-start-column="30" selection-end-line="302" selection-end-column="30" />
+        <state relative-caret-position="293">
+          <caret line="1393" column="30" lean-forward="true" selection-start-line="1393" selection-start-column="30" selection-end-line="1393" selection-end-column="30" />
           <folding>
             <element signature="e#23#38#0" expanded="true" />
           </folding>

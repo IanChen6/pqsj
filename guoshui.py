@@ -322,7 +322,7 @@ class guoshui(object):
                 else:
                     time.sleep(3)
             else:
-                logger.warn("登录失败,重试")
+                logger.warn("{}登录失败,重试".format(self.customerid))
 
         return False
 
@@ -343,7 +343,7 @@ class guoshui(object):
         self.parse_biaoge(browser, shuiming)
 
     def parse_biaoge(self, browser, shuiming):
-        logger.info("截取国税{}申报信息".format(shuiming))
+        logger.info("{}截取国税{}申报信息".format(self.customerid,shuiming))
         wait = ui.WebDriverWait(browser, 10)
         wait.until(lambda browser: browser.find_element_by_css_selector("#sbrqq .mini-buttonedit-input"))
         # 输入查询日期
@@ -360,7 +360,7 @@ class guoshui(object):
                 month = m
                 qsrq = '{}{}01'.format(year, month)
                 zzrq = '{}{}{}'.format(year, month, days)
-                logger.info("查询{}月".format(m))
+                logger.info("{}查询{}月".format(self.customerid,m))
                 browser.get(url='http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/cxdy/sbcx.html')
                 wait = ui.WebDriverWait(browser, 10)
                 wait.until(lambda browser: browser.find_element_by_css_selector("#sbrqq .mini-buttonedit-input"))
@@ -385,11 +385,11 @@ class guoshui(object):
                     img_list.append(imgname)
                     img_list3 = []
                     if "查询申报表" in shuizhong:
-                        logger.info("有申报表需要查询")
+                        logger.info("{}有申报表需要查询".format(self.customerid))
                         img_list3 = self.parse_shenbaobiao(browser, a, month)
                     img_list = img_list + img_list3
                     print(shuizhong)
-                    logger.info("查询{}月完成".format(m))
+                    logger.info("{}查询{}月完成".format(self.customerid,m))
                     params = (
                         self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid,
                         str(shuizhong[1]),
@@ -425,15 +425,15 @@ class guoshui(object):
                 img_list.append(imgname)
                 img_list3 = []
                 if "查询申报表" in shuizhong:
-                    logger.info("有申报表需要查询")
+                    logger.info("{}有申报表需要查询".format(self.customerid))
                     img_list3 = self.parse_shenbaobiao(browser, a, month)
-                    logger.info("获取申报表完成")
+                    logger.info("{}获取申报表完成".format(self.customerid))
 
                 img_list = img_list + img_list3
-                logger.info("打印信息")
+                # logger.info("打印信息")
                 print(shuizhong)
                 logger.info(shuizhong)
-                logger.info("开始插入数据库")
+                logger.info("{}开始插入数据库".format(self.customerid))
                 params = (
                     self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid,
                     str(shuizhong[1]),
@@ -442,14 +442,14 @@ class guoshui(object):
                     self.img2json(img_list))
                 logger.info(params)
                 self.insert_db("[dbo].[Python_Serivce_GSTaxApplyShenZhen_Add]", params)
-                logger.info("数据库插入完成")
-        logger.info("截取国税申报信息已完成")
+                logger.info("{}数据库插入完成".format(self.customerid))
+        logger.info("{}截取国税申报信息已完成".format(self.customerid))
 
     # 申报表截图
     def parse_shenbaobiao(self, browser, a, month):
         browser.find_element_by_xpath('//table[@id="mini-grid-table-bodysbqkGrid"]/tbody/tr[%s]//a[1]'%(a,)).click()
         try:
-            logger.info("申报表截图")
+            logger.info("{}申报表截图".format(self.customerid))
             wait = ui.WebDriverWait(browser, 5)
             wait.until(lambda browser: browser.find_element_by_css_selector(".mini-window iframe"))
             browser.find_element_by_class_name('mini-tools-max').click()
@@ -470,12 +470,12 @@ class guoshui(object):
                 except Exception as e:
                     logger.error("出现错误:", e)
                     continue
-            logger.info("申报表截图完成")
+            logger.info("{}申报表截图完成".format(self.customerid))
             browser.switch_to.default_content()
-            logger.info("返回主页面")
+            logger.info("{}返回主页面".format(self.customerid))
 
             browser.find_element_by_class_name('mini-tools-close').click()
-            logger.info("关闭当前申报表")
+            logger.info("{}关闭当前申报表".format(self.customerid))
 
             return img_list2
         except Exception as e:
@@ -484,7 +484,7 @@ class guoshui(object):
 
     # 国税缴款
     def parse_jiaokuan(self, browser):
-        logger.info("截取国税缴款信息")
+        logger.info("{}截取国税缴款信息".format(self.customerid))
         # 输入查询日期
         if self.wholeyear:
             for m in range(1, 13):
@@ -499,7 +499,7 @@ class guoshui(object):
                 month = m
                 qsrq = '{}{}01'.format(year, month)
                 zzrq = '{}{}{}'.format(year, month, days)
-                logger.info("缴款查询{}月".format(m))
+                logger.info("{}缴款查询{}月".format(self.customerid,m))
                 browser.find_element_by_css_selector("#sssqq .mini-buttonedit-input").clear()
                 browser.find_element_by_css_selector("#sssqq .mini-buttonedit-input").send_keys('{}'.format(qsrq))
                 browser.find_element_by_css_selector("#sssqz .mini-buttonedit-input").clear()
@@ -507,14 +507,14 @@ class guoshui(object):
                 try:
                     browser.find_element_by_css_selector("#mini-37 .mini-button-text").click()
                 except Exception as e:
-                    logger.info("服务器出错")
+                    logger.info("{}服务器出错".format(self.customerid))
                 wait = ui.WebDriverWait(browser, 10)
                 wait.until(lambda browser: browser.find_element_by_css_selector("#stepnext .mini-button-text"))
                 browser.find_element_by_css_selector("#stepnext .mini-button-text").click()
                 try:
                     browser.find_element_by_css_selector(".mini-tools-close ").click()
                 except:
-                    logger.info("处理没有缴款信息的错误")
+                    logger.info("{}处理没有缴款信息的错误".format(self.customerid))
                 img = self.save_png(browser, '{}/缴税信息.png'.format(self.user))
                 iml = []
                 iml.append(img)
@@ -570,7 +570,7 @@ class guoshui(object):
                     self.img2json(iml))
                 logger.info(params)
                 self.insert_db("[dbo].[Python_Serivce_GSTaxChargeShenZhen_Add]", params)
-            logger.info("截取国税缴款信息已完成")
+            logger.info("{}截取国税缴款信息已完成".format(self.customerid))
 
     # 前往地税
     def qwdishui(self, browser):
@@ -578,7 +578,7 @@ class guoshui(object):
         while try_times <=3:
             ds_url = 'http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/sb/djsxx/djsxx.html'
             browser.get(url=ds_url)
-            logger.info("开始登录地税")
+            logger.info("{}开始登录地税".format(self.customerid))
             wait = ui.WebDriverWait(browser, 10)
             try:
                 wait.until(lambda browser: browser.find_element_by_css_selector("#mini-29 .mini-button-text"))
@@ -596,7 +596,7 @@ class guoshui(object):
             except:
                 try_times+=1
     def dishui(self, browser):
-        logger.info("截取地税申报信息")
+        logger.info("{}截取地税申报信息".format(self.customerid))
         time.sleep(2)
         windows = browser.window_handles
         window1 = browser.current_window_handle
@@ -632,7 +632,7 @@ class guoshui(object):
                 month = m
                 qsrq = '{}-{}-01'.format(year, month)
                 zzrq = '{}-{}-{}'.format(year, month, days)
-                logger.info("查询{}月".format(m))
+                logger.info("{}查询{}月".format(self.customerid,m))
                 # 查询个人所得税
                 browser.find_element_by_css_selector('#zsxmDm').find_element_by_xpath(
                     '//option[@value="10106"]').click()  # 选择个人所得税
@@ -858,7 +858,7 @@ class guoshui(object):
                             params = (
                             self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, "", "")
                             self.insert_db('[dbo].[Python_Serivce_DSTaxApplyShenZhen_NoDS3]', params)
-                logger.info("截取地税申报信息已完成")
+                logger.info("{}截取地税申报信息已完成".format(self.customerid))
         if self.wholeyear:
             for m in range(1, 13):
                 year = self.batchyear
@@ -872,9 +872,9 @@ class guoshui(object):
                 month = m
                 qsrq = '{}-{}-01'.format(year, month)
                 zzrq = '{}-{}-{}'.format(year, month, days)
-                logger.info("查询{}月".format(m))
+                logger.info("{}查询{}月".format(self.customerid,m))
                 # 已缴款查询
-                logger.info("截取地税缴款信息")
+                logger.info("{}截取地税缴款信息".format(self.customerid))
                 gbds = browser.window_handles
                 dq = browser.current_window_handle
                 for s in gbds:
@@ -976,7 +976,7 @@ class guoshui(object):
                         jkjs)
                     logger.info(params)
                     self.insert_db("[dbo].[Python_Serivce_DSTaxChargeShenZhen_Add]", params)
-                logger.info("截取地税缴款信息已完成")
+                logger.info("{}截取地税缴款信息已完成".format(self.customerid))
         else:
             # 查询个人所得税
             wait = ui.WebDriverWait(browser, 10)
@@ -1221,7 +1221,7 @@ class guoshui(object):
                         self.insert_db('[dbo].[Python_Serivce_DSTaxApplyShenZhen_NoDS3]',params)
 
 
-            logger.info("截取地税申报信息已完成")
+            logger.info("{}截取地税申报信息已完成".format(self.customerid))
             # 已缴款查询
             gbds = browser.window_handles
             dq = browser.current_window_handle
@@ -1317,7 +1317,7 @@ class guoshui(object):
                     jkjs)
                 logger.info(params)
                 self.insert_db("[dbo].[Python_Serivce_DSTaxChargeShenZhen_Add]", params)
-            logger.info("截取地税缴款信息已完成")
+            logger.info("{}截取地税缴款信息已完成".format(self.customerid))
 
     def excute_spider(self):
         try:
@@ -1368,7 +1368,7 @@ class guoshui(object):
             time.sleep(3)
             self.shuizhongchaxun(browser)
         except Exception as e:
-            logger.info("GSYCX出错")
+            logger.info("{}GSYCX出错".format(self.customerid))
             logger.warn(e)
             logger.info("国税已申报查询失败")
             job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-1', "国税已申报查询失败")
@@ -1389,7 +1389,7 @@ class guoshui(object):
             self.qwdishui(browser)
             job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '1', '成功爬取')
             print("爬取完成")
-            logger.info("全部爬取完成")
+            logger.info("{}全部爬取完成".format(self.customerid))
             browser.quit()
         except Exception as e:
             logger.warn(e)
