@@ -25,7 +25,7 @@ from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
 from pdfminer.pdfparser import PDFParser, PDFDocument
 from suds.client import Client
 import suds
-
+from proxy_ceshi import get_all_proxie
 try:
     import urlparse as parse
 except:
@@ -199,6 +199,9 @@ class guoshui(object):
         while try_times <= 5:
             try_times += 1
             session = requests.session()
+            proxy_list = get_all_proxie()
+            proxy = proxy_list[random.randint(0, len(proxy_list) - 1)]
+            session.proxies = proxy
             headers = {'Host': 'dzswj.szgs.gov.cn',
                        'Accept': 'application/json, text/javascript, */*; q=0.01',
                        'Accept-Language': 'zh-CN,zh;q=0.8',
