@@ -20,8 +20,8 @@
       <file leaf-file-name="guoshui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guoshui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1265">
-              <caret line="328" column="51" lean-forward="false" selection-start-line="328" selection-start-column="51" selection-end-line="328" selection-end-column="51" />
+            <state relative-caret-position="198">
+              <caret line="1391" column="34" lean-forward="true" selection-start-line="1391" selection-start-column="34" selection-end-line="1391" selection-end-column="34" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
               </folding>
@@ -90,6 +90,7 @@
       <find>random</find>
       <find>excute</find>
       <find>log</find>
+      <find>logg</find>
       <find>logger</find>
     </findStrings>
   </component>
@@ -654,8 +655,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guoshui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1265">
-          <caret line="328" column="51" lean-forward="false" selection-start-line="328" selection-start-column="51" selection-end-line="328" selection-end-column="51" />
+        <state relative-caret-position="198">
+          <caret line="1391" column="34" lean-forward="true" selection-start-line="1391" selection-start-column="34" selection-end-line="1391" selection-end-column="34" />
           <folding>
             <element signature="e#23#38#0" expanded="true" />
           </folding>
