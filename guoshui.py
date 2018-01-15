@@ -3,7 +3,6 @@ import calendar
 import random
 import re
 from urllib.parse import urlencode
-
 from selenium.webdriver import ActionChains
 
 __author__ = 'IanChen'
@@ -272,7 +271,8 @@ class guoshui(object):
                 else:
                     time.sleep(3)
             else:
-                logger.warn("登录失败,重试")
+                logger.warn("{}登录失败,重试".format(self.customerid))
+        try_times=0
         while try_times <= 3:
             try_times += 1
             session = requests.session()
@@ -323,7 +323,6 @@ class guoshui(object):
                     time.sleep(3)
             else:
                 logger.warn("{}登录失败,重试".format(self.customerid))
-
         return False
 
     def shuizhongchaxun(self, browser):
