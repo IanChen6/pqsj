@@ -20,6 +20,7 @@ import json
 import time
 import redis
 import os
+import sys
 
 redis_cli=redis.StrictRedis(host='localhost', port=6379, decode_responses=True)
 
@@ -28,7 +29,7 @@ def run_test(user, pwd, batchid, batchyear, batchmonth,companyid, customerid,hos
     print("++++++++++++++++++++++++++++++++++++")
     print('jobs[ts_id=%s] running....' % batchid)
     time.sleep(2)
-    logger=create_logger(path=os.path.basename(__file__))
+    logger=create_logger(path=os.path.dirname(sys.argv[0]).split('/')[-1])
     try:
         gs = guoshui(user,pwd,batchid,batchyear, batchmonth,companyid, customerid)
         gs.excute_spider()

@@ -1,0 +1,68 @@
+Tue 16 Jan 2018 11:58:01 INFO guoshui.py 227 9484 12616 customerid:9,开始尝试登陆
+Tue 16 Jan 2018 11:58:01 INFO guoshui.py 227 9484 12616 customerid:9,开始尝试登陆
+Tue 16 Jan 2018 11:58:51 INFO guoshui.py 227 15468 14732 customerid:9,开始尝试登陆
+Tue 16 Jan 2018 11:58:51 INFO guoshui.py 227 15468 14732 customerid:9,开始尝试登陆
+Tue 16 Jan 2018 11:58:53 INFO guoshui.py 258 15468 14732 customerid:9，获取验证码为：[{"x":271,"y":28},{"x":70,"y":20},{"x":218,"y":99}]
+Tue 16 Jan 2018 11:58:53 INFO guoshui.py 258 15468 14732 customerid:9，获取验证码为：[{"x":271,"y":28},{"x":70,"y":20},{"x":218,"y":99}]
+Tue 16 Jan 2018 11:58:53 INFO guoshui.py 260 15468 14732 customerid:9，验证验证码[{"x":271,"y":28},{"x":70,"y":20},{"x":218,"y":99}]
+Tue 16 Jan 2018 11:58:53 INFO guoshui.py 260 15468 14732 customerid:9，验证验证码[{"x":271,"y":28},{"x":70,"y":20},{"x":218,"y":99}]
+Tue 16 Jan 2018 11:58:53 INFO guoshui.py 268 15468 14732 customerid:{},成功post数据
+Tue 16 Jan 2018 11:58:53 INFO guoshui.py 268 15468 14732 customerid:{},成功post数据
+Tue 16 Jan 2018 11:58:53 INFO guoshui.py 273 15468 14732 customerid:9pass
+Tue 16 Jan 2018 11:58:53 INFO guoshui.py 273 15468 14732 customerid:9pass
+Tue 16 Jan 2018 11:59:01 INFO guoshui.py 354 15468 14732 customerid:9截取国税增值税申报信息
+Tue 16 Jan 2018 11:59:01 INFO guoshui.py 354 15468 14732 customerid:9截取国税增值税申报信息
+Tue 16 Jan 2018 11:59:04 INFO guoshui.py 436 15468 14732 customerid:9有申报表需要查询
+Tue 16 Jan 2018 11:59:04 INFO guoshui.py 436 15468 14732 customerid:9有申报表需要查询
+Tue 16 Jan 2018 11:59:04 INFO guoshui.py 460 15468 14732 customerid:9申报表截图
+Tue 16 Jan 2018 11:59:04 INFO guoshui.py 460 15468 14732 customerid:9申报表截图
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 481 15468 14732 customerid:9申报表截图完成
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 481 15468 14732 customerid:9申报表截图完成
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 483 15468 14732 customerid:9返回主页面
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 483 15468 14732 customerid:9返回主页面
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 486 15468 14732 customerid:9关闭当前申报表
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 486 15468 14732 customerid:9关闭当前申报表
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 438 15468 14732 customerid:9获取申报表完成
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 438 15468 14732 customerid:9获取申报表完成
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 443 15468 14732 ['1', '《增值税纳税申报表（小规模纳税人适用）》', '2018-01-12', '2017-10-01', '2017-12-31', '申报成功', '0', '查询申报表', '作废']
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 443 15468 14732 ['1', '《增值税纳税申报表（小规模纳税人适用）》', '2018-01-12', '2017-10-01', '2017-12-31', '申报成功', '0', '查询申报表', '作废']
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 444 15468 14732 customerid:9开始插入数据库
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 444 15468 14732 customerid:9开始插入数据库
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 451 15468 14732 ('5590', 2018, '01', 18282900, 9, '《增值税纳税申报表（小规模纳税人适用）》', '2018-01-12', '2017-10-01', '2017-12-31', '申报成功', '0', '{"2": "files/1z516H07514s7.png", "3": "files/1516W0751A48m.png", "1": "files/15H160A75z147.png", "0": "files/1516q075z1A44.png"}')
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 451 15468 14732 ('5590', 2018, '01', 18282900, 9, '《增值税纳税申报表（小规模纳税人适用）》', '2018-01-12', '2017-10-01', '2017-12-31', '申报成功', '0', '{"2": "files/1z516H07514s7.png", "3": "files/1516W0751A48m.png", "1": "files/15H160A75z147.png", "0": "files/1516q075z1A44.png"}')
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 453 15468 14732 customerid:9数据库插入完成
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 453 15468 14732 customerid:9数据库插入完成
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 454 15468 14732 customerid:9截取国税申报信息已完成
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 454 15468 14732 customerid:9截取国税申报信息已完成
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 354 15468 14732 customerid:9截取国税财务报表申报信息
+Tue 16 Jan 2018 11:59:08 INFO guoshui.py 354 15468 14732 customerid:9截取国税财务报表申报信息
+Tue 16 Jan 2018 11:59:11 INFO guoshui.py 454 15468 14732 customerid:9截取国税申报信息已完成
+Tue 16 Jan 2018 11:59:11 INFO guoshui.py 454 15468 14732 customerid:9截取国税申报信息已完成
+Tue 16 Jan 2018 11:59:11 INFO guoshui.py 354 15468 14732 customerid:9截取国税所得税申报信息
+Tue 16 Jan 2018 11:59:11 INFO guoshui.py 354 15468 14732 customerid:9截取国税所得税申报信息
+Tue 16 Jan 2018 11:59:13 INFO guoshui.py 436 15468 14732 customerid:9有申报表需要查询
+Tue 16 Jan 2018 11:59:13 INFO guoshui.py 436 15468 14732 customerid:9有申报表需要查询
+Tue 16 Jan 2018 11:59:13 INFO guoshui.py 460 15468 14732 customerid:9申报表截图
+Tue 16 Jan 2018 11:59:13 INFO guoshui.py 460 15468 14732 customerid:9申报表截图
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 481 15468 14732 customerid:9申报表截图完成
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 481 15468 14732 customerid:9申报表截图完成
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 483 15468 14732 customerid:9返回主页面
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 483 15468 14732 customerid:9返回主页面
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 486 15468 14732 customerid:9关闭当前申报表
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 486 15468 14732 customerid:9关闭当前申报表
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 438 15468 14732 customerid:9获取申报表完成
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 438 15468 14732 customerid:9获取申报表完成
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 443 15468 14732 ['1', '《企业所得税（查账征收）月季度预缴纳税申报表（A类，2015版）》', '2018-01-12', '2017-10-01', '2017-12-31', '申报成功', '0', '查询申报表', '作废']
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 443 15468 14732 ['1', '《企业所得税（查账征收）月季度预缴纳税申报表（A类，2015版）》', '2018-01-12', '2017-10-01', '2017-12-31', '申报成功', '0', '查询申报表', '作废']
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 444 15468 14732 customerid:9开始插入数据库
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 444 15468 14732 customerid:9开始插入数据库
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 451 15468 14732 ('5590', 2018, '01', 18282900, 9, '《企业所得税（查账征收）月季度预缴纳税申报表（A类，2015版）》', '2018-01-12', '2017-10-01', '2017-12-31', '申报成功', '0', '{"3": "files/15160M7515U7o.png", "1": "files/1q51v6075H157.png", "0": "files/15R16075s153q.png", "5": "files/1516075158z.png", "4": "files/15160G7Aj5157.png", "6": "files/151607l51q58.png", "2": "files/15zc1G6075157.png"}')
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 451 15468 14732 ('5590', 2018, '01', 18282900, 9, '《企业所得税（查账征收）月季度预缴纳税申报表（A类，2015版）》', '2018-01-12', '2017-10-01', '2017-12-31', '申报成功', '0', '{"3": "files/15160M7515U7o.png", "1": "files/1q51v6075H157.png", "0": "files/15R16075s153q.png", "5": "files/1516075158z.png", "4": "files/15160G7Aj5157.png", "6": "files/151607l51q58.png", "2": "files/15zc1G6075157.png"}')
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 453 15468 14732 customerid:9数据库插入完成
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 453 15468 14732 customerid:9数据库插入完成
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 454 15468 14732 customerid:9截取国税申报信息已完成
+Tue 16 Jan 2018 11:59:18 INFO guoshui.py 454 15468 14732 customerid:9截取国税申报信息已完成
+Tue 16 Jan 2018 11:59:19 INFO guoshui.py 495 15468 14732 customerid:9截取国税缴款信息
+Tue 16 Jan 2018 11:59:19 INFO guoshui.py 495 15468 14732 customerid:9截取国税缴款信息
+Tue 16 Jan 2018 11:59:19 INFO guoshui.py 581 15468 14732 customerid:9截取国税缴款信息已完成
+Tue 16 Jan 2018 11:59:19 INFO guoshui.py 581 15468 14732 customerid:9截取国税缴款信息已完成

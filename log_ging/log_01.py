@@ -11,7 +11,7 @@ import logging
 # logging.info("hha")
 # logging.error("see")
 # logging.critical("hello")
-def create_logger(level=logging.DEBUG,path='task'):
+def create_logger(level=logging.DEBUG,path="task"):
 # create logger
     logger_name = "example"
     logger = logging.getLogger(logger_name)
