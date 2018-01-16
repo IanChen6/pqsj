@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be93bd86-aa2f-42d7-9157-c290b2f33891" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/ghostdriver.log" afterPath="$PROJECT_DIR$/ghostdriver.log" />
       <change beforePath="$PROJECT_DIR$/guoshui.py" afterPath="$PROJECT_DIR$/guoshui.py" />
-      <change beforePath="$PROJECT_DIR$/log_ging/log_01.py" afterPath="$PROJECT_DIR$/log_ging/log_01.py" />
-      <change beforePath="$PROJECT_DIR$/logs/guoshui.pylog.log" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/logs/tasks.pylog.log" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/tasks.py" afterPath="$PROJECT_DIR$/tasks.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,8 +20,8 @@
       <file leaf-file-name="guoshui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guoshui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="1349" column="42" lean-forward="true" selection-start-line="1349" selection-start-column="42" selection-end-line="1349" selection-end-column="42" />
+            <state relative-caret-position="255">
+              <caret line="1364" column="42" lean-forward="false" selection-start-line="1364" selection-start-column="33" selection-end-line="1364" selection-end-column="42" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
               </folding>
@@ -79,7 +72,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pr</find>
       <find>mini-37</find>
       <find>25</find>
       <find>random</find>
@@ -109,6 +101,7 @@
       <find>sy</find>
       <find>sys.</find>
       <find>sys.a</find>
+      <find>cookies.j</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -693,8 +686,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guoshui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="1349" column="42" lean-forward="true" selection-start-line="1349" selection-start-column="42" selection-end-line="1349" selection-end-column="42" />
+        <state relative-caret-position="255">
+          <caret line="1364" column="42" lean-forward="false" selection-start-line="1364" selection-start-column="33" selection-end-line="1364" selection-end-column="42" />
           <folding>
             <element signature="e#23#38#0" expanded="true" />
           </folding>
