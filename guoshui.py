@@ -273,18 +273,19 @@ class guoshui(object):
             resp = session.post(url=login_url, data=login_data)
             self.logger.info("customerid:{},成功post数据".format(self.customerid))
             panduan=resp.json()['message']
-            self.logger(panduan)
-            if "验证码正确" in jyjg.json()['message']:
-                if "登录成功" in resp.json()['message']:
-                    print('登录成功')
-                    self.logger.info('customerid:{}pass'.format(self.customerid))
-                    cookies = {}
-                    for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
-                        cookies[k] = v
-                    return cookies, session
-                else:
-                    time.sleep(3)
-            else:
+            # self.logger(panduan)
+            try:
+                if "验证码正确" in jyjg.json()['message']:
+                    if "登录成功" in resp.json()['message']:
+                        print('登录成功')
+                        self.logger.info('customerid:{}pass'.format(self.customerid))
+                        cookies = {}
+                        for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
+                            cookies[k] = v
+                        return cookies, session
+                    else:
+                        time.sleep(3)
+            except Exception as e:
                 self.logger.warn("customerid:{}登录失败,重试".format(self.customerid))
         try_handed=0
         while try_handed <= 3:

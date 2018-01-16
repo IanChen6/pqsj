@@ -20,8 +20,8 @@
       <file leaf-file-name="guoshui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guoshui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="402" column="39" lean-forward="true" selection-start-line="402" selection-start-column="39" selection-end-line="402" selection-end-column="39" />
+            <state relative-caret-position="160">
+              <caret line="288" column="50" lean-forward="false" selection-start-line="288" selection-start-column="50" selection-end-line="288" selection-end-column="50" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
               </folding>
@@ -72,7 +72,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>25</find>
       <find>random</find>
       <find>logg</find>
       <find>login</find>
@@ -102,6 +101,7 @@
       <find>成功po</find>
       <find>开始</find>
       <find>excute</find>
+      <find>mini-grid</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -127,8 +127,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="648" />
-    <option name="y" value="312" />
+    <option name="x" value="703" />
+    <option name="y" value="241" />
     <option name="width" value="1735" />
     <option name="height" value="983" />
   </component>
@@ -257,7 +257,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="648" y="312" width="1735" height="983" extended-state="0" />
+    <frame x="703" y="241" width="1735" height="983" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -302,7 +302,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>411</line>
+          <line>412</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -317,37 +317,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>347</line>
+          <line>348</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>363</line>
+          <line>364</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>503</line>
+          <line>504</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>594</line>
+          <line>595</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>616</line>
+          <line>617</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>276</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>467</line>
+          <line>468</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -681,8 +676,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guoshui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="402" column="39" lean-forward="true" selection-start-line="402" selection-start-column="39" selection-end-line="402" selection-end-column="39" />
+        <state relative-caret-position="160">
+          <caret line="288" column="50" lean-forward="false" selection-start-line="288" selection-start-column="50" selection-end-line="288" selection-end-column="50" />
           <folding>
             <element signature="e#23#38#0" expanded="true" />
           </folding>
