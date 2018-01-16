@@ -88,8 +88,10 @@ class guoshui(object):
             raise Exception("数据库连接失败")
         # cur.callproc('[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]', (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
         len(params)
+        conn.autocommit(True)
         cur.callproc(sql, params)
-        conn.commit()
+        conn.autocommit(False)
+        # conn.commit()
         cur.close()
 
     def get_db(self):
@@ -159,17 +161,18 @@ class guoshui(object):
                 if auto is not None:
                     result1 = str(auto)
                     return result1
-                result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
-                # flag = login("91440300MA5DRRFB45", "10284784", result)
-                for i in range(30):
-                    result1 = client.service.GetYZCode(md)
-                    if result1 is not None:
-                        result1 = str(result1)
-                        return result1
-                    time.sleep(10)
+                if auto is None:
+                    return auto
+                # result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
+                # # flag = login("91440300MA5DRRFB45", "10284784", result)
+                # for i in range(30):
+                #     result1 = client.service.GetYZCode(md)
+                #     if result1 is not None:
+                #         result1 = str(result1)
+                #         return result1
+                #     time.sleep(10)
             except Exception as e:
                 self.logger.warn(e)
-            self.insert_db("[dbo].[Python_Serivce_Job_Expire]",(self.batchid,self.customerid))
             break
 
     def parse_pdf(self, pdf_path):
