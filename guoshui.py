@@ -272,7 +272,7 @@ class guoshui(object):
             login_url = 'http://dzswj.szgs.gov.cn/api/auth/clientWt'
             resp = session.post(url=login_url, data=login_data)
             self.logger.info("customerid:{},成功post数据".format(self.customerid))
-            panduan=resp.json()['message']
+            # panduan=resp.json()['message']
             # self.logger(panduan)
             try:
                 if "验证码正确" in jyjg.json()['message']:
@@ -286,7 +286,8 @@ class guoshui(object):
                     else:
                         time.sleep(3)
             except Exception as e:
-                self.logger.warn("customerid:{}登录失败,重试".format(self.customerid))
+                self.logger.warn("customerid:{}登录失败".format(self.customerid))
+            self.logger.warn("customerid:{}登录失败,开始重试".format(self.customerid))
         try_handed=0
         while try_handed <= 3:
             self.logger.info("customerid:{}手动登陆".format())
@@ -1341,6 +1342,7 @@ class guoshui(object):
     def excute_spider(self):
         try:
             cookies, session = self.login()
+            logger.info("customerid:{}获取cookies".format(self.customerid))
             jsoncookies = json.dumps(cookies)
             with open('cookies/{}cookies.json'.format(self.customerid), 'w') as f:  # 将login后的cookies提取出来
                 f.write(jsoncookies)
