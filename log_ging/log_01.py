@@ -31,7 +31,6 @@ def create_logger(level=logging.DEBUG,path="task"):
 # add handler and formatter to logger
     fh.setFormatter(formatter)
     logger.addHandler(fh)
-    logger.removeHandler(fh)
     return logger
 # print log info
 if __name__=="__main__":
