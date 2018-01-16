@@ -287,7 +287,7 @@ class guoshui(object):
                         for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
                             cookies[k] = v
                         return cookies
-                    elif "账户和密码不匹配" in resp.json()['message']:
+                    elif "账户和密码不匹配" in resp.json()['message'] or "账户不存在" in resp.json()['message']:
                         print('账号和密码不匹配')
                         self.logger.info('customerid:{}账号和密码不匹配'.format(self.customerid))
                         status="账号和密码不匹配"
@@ -348,7 +348,7 @@ class guoshui(object):
                     for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
                         cookies[k] = v
                     return cookies
-                elif "账户和密码不匹配" in resp.json()['message']:
+                elif "账户和密码不匹配" in resp.json()['message'] or "账户不存在" in resp.json()['message']:
                     print('账号和密码不匹配')
                     self.logger.info('customerid:{}账号和密码不匹配'.format(self.customerid))
                     status = "账号和密码不匹配"
