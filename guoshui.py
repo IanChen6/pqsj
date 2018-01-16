@@ -82,14 +82,14 @@ class guoshui(object):
 
     def insert_db(self, sql, params):
         conn = pymssql.connect(host=self.host, port=self.port, user='Python', password='pl,okmPL<OKM',
-                               database=self.db, charset='utf8',autocommit=False)
+                               database=self.db, charset='utf8')
         cur = conn.cursor()
         if not cur:
             raise Exception("数据库连接失败")
         # cur.callproc('[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]', (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
         len(params)
         cur.callproc(sql, params)
-        # conn.commit()
+        conn.commit()
         cur.close()
 
     def get_db(self):
@@ -229,7 +229,10 @@ class guoshui(object):
             session = requests.session()
             # proxy_list = get_all_proxie()
             # proxy = proxy_list[random.randint(0, len(proxy_list) - 1)]
-            session.proxies = sys.argv[1]
+            try:
+                session.proxies = sys.argv[1]
+            except:
+                self.logger.info("未传代理参数，启用本机IP")
             # session.proxies = {'https': 'http://116.22.211.55:6897', 'http': 'http://116.22.211.55:6897'}
             headers = {'Host': 'dzswj.szgs.gov.cn',
                        'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -286,7 +289,10 @@ class guoshui(object):
             session = requests.session()
             # proxy_list = get_all_proxie()
             # proxy = proxy_list[random.randint(0, len(proxy_list) - 1)]
-            session.proxies = sys.argv[1]
+            try:
+                session.proxies = sys.argv[1]
+            except:
+                print("未传入代理参数")
             # session.proxies = {'https': 'http://116.22.211.55:6897', 'http': 'http://116.22.211.55:6897'}
             headers = {'Host': 'dzswj.szgs.gov.cn',
                        'Accept': 'application/json, text/javascript, */*; q=0.01',
