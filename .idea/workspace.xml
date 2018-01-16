@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="be93bd86-aa2f-42d7-9157-c290b2f33891" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/guoshui.py" afterPath="$PROJECT_DIR$/guoshui.py" />
+      <change beforePath="$PROJECT_DIR$/tasks.py" afterPath="$PROJECT_DIR$/tasks_sz.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +30,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tasks.py">
+      <file leaf-file-name="tasks_sz.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tasks_sz.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
               <caret line="33" column="84" lean-forward="false" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
@@ -224,7 +224,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="pqsj" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tasks.py" />
+      <option name="SCRIPT_NAME" value="D:\新建文件夹\pqsj\tasks_sz.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -293,11 +293,11 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tasks.py</url>
+          <url>file://$PROJECT_DIR$/tasks_sz.py</url>
           <line>43</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tasks.py</url>
+          <url>file://$PROJECT_DIR$/tasks_sz.py</url>
           <line>28</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -347,7 +347,7 @@
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tasks.py</url>
+          <url>file://$PROJECT_DIR$/tasks_sz.py</url>
           <line>30</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
@@ -359,7 +359,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/log.log" />
     <entry file="file://$PROJECT_DIR$/captcha.jpg" />
-    <entry file="file://$PROJECT_DIR$/tasks.py">
+    <entry file="file://$PROJECT_DIR$/tasks_sz.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="32" column="26" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
@@ -397,7 +397,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/log.log" />
     <entry file="file://$PROJECT_DIR$/captcha.jpg" />
-    <entry file="file://$PROJECT_DIR$/tasks.py">
+    <entry file="file://$PROJECT_DIR$/tasks_sz.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="32" column="26" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
@@ -451,7 +451,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tasks.py">
+    <entry file="file://$PROJECT_DIR$/tasks_sz.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
@@ -473,7 +473,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/log.log" />
     <entry file="file://$PROJECT_DIR$/captcha.jpg" />
-    <entry file="file://$PROJECT_DIR$/tasks.py">
+    <entry file="file://$PROJECT_DIR$/tasks_sz.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="893">
           <caret line="47" column="31" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="47" selection-end-column="31" />
@@ -526,7 +526,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/log.log" />
     <entry file="file://$PROJECT_DIR$/captcha.jpg" />
-    <entry file="file://$PROJECT_DIR$/tasks.py">
+    <entry file="file://$PROJECT_DIR$/tasks_sz.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
@@ -665,7 +665,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tasks.py">
+    <entry file="file://$PROJECT_DIR$/tasks_sz.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="33" column="84" lean-forward="false" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
