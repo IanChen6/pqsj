@@ -82,14 +82,14 @@ class guoshui(object):
 
     def insert_db(self, sql, params):
         conn = pymssql.connect(host=self.host, port=self.port, user='Python', password='pl,okmPL<OKM',
-                               database=self.db, charset='utf8')
+                               database=self.db, charset='utf8',autocommit=False)
         cur = conn.cursor()
         if not cur:
             raise Exception("数据库连接失败")
         # cur.callproc('[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]', (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
         len(params)
         cur.callproc(sql, params)
-        conn.commit()
+        # conn.commit()
         cur.close()
 
     def get_db(self):
@@ -265,7 +265,7 @@ class guoshui(object):
             self.user, self.jiami(), tag, time_l)
             login_url = 'http://dzswj.szgs.gov.cn/api/auth/clientWt'
             resp = session.post(url=login_url, data=login_data)
-            self.logger.info("customerid:{},成功post数据")
+            self.logger.info("customerid:{},成功post数据".format(self.customerid))
             panduan=resp.json()['message']
             if "验证码正确" in jyjg.json()['message']:
                 if "登录成功" in resp.json()['message']:
