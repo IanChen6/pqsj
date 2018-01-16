@@ -395,7 +395,7 @@ class guoshui(object):
                 content = browser.page_source
                 root = etree.HTML(content)
                 select = root.xpath('//table[@id="mini-grid-table-bodysbqkGrid"]/tbody/tr')
-                a = -1
+                a = 1
                 for i in select[1:]:
                     shuizhong = i.xpath('.//text()')
                     a += 1

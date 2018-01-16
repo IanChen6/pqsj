@@ -20,8 +20,8 @@
       <file leaf-file-name="guoshui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guoshui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="276" column="12" lean-forward="true" selection-start-line="276" selection-start-column="12" selection-end-line="276" selection-end-column="12" />
+            <state relative-caret-position="236">
+              <caret line="402" column="39" lean-forward="true" selection-start-line="402" selection-start-column="39" selection-end-line="402" selection-end-column="39" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
               </folding>
@@ -127,8 +127,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="843" />
-    <option name="y" value="67" />
+    <option name="x" value="648" />
+    <option name="y" value="312" />
     <option name="width" value="1735" />
     <option name="height" value="983" />
   </component>
@@ -257,7 +257,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="843" y="67" width="1735" height="983" extended-state="0" />
+    <frame x="648" y="312" width="1735" height="983" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -681,8 +681,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guoshui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="276" column="12" lean-forward="true" selection-start-line="276" selection-start-column="12" selection-end-line="276" selection-end-column="12" />
+        <state relative-caret-position="236">
+          <caret line="402" column="39" lean-forward="true" selection-start-line="402" selection-start-column="39" selection-end-line="402" selection-end-column="39" />
           <folding>
             <element signature="e#23#38#0" expanded="true" />
           </folding>
