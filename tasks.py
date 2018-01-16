@@ -23,16 +23,17 @@ import os
 import sys
 
 redis_cli=redis.StrictRedis(host='localhost', port=6379, decode_responses=True)
+logger = create_logger(path=os.path.dirname(sys.argv[0]).split('/')[-1])
 
 
 def run_test(user, pwd, batchid, batchyear, batchmonth,companyid, customerid,host,port,db):
     print("++++++++++++++++++++++++++++++++++++")
     print('jobs[ts_id=%s] running....' % batchid)
     time.sleep(2)
-    logger=create_logger(path=os.path.dirname(sys.argv[0]).split('/')[-1])
     try:
         gs = guoshui(user,pwd,batchid,batchyear, batchmonth,companyid, customerid,logger)
         gs.excute_spider()
+        # logger.removeHandler()
     except Exception as e:
         logger.info("something wrong during crawling")
         logger.warn(e)
