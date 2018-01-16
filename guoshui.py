@@ -273,6 +273,7 @@ class guoshui(object):
             resp = session.post(url=login_url, data=login_data)
             self.logger.info("customerid:{},成功post数据".format(self.customerid))
             panduan=resp.json()['message']
+            self.logger(panduan)
             if "验证码正确" in jyjg.json()['message']:
                 if "登录成功" in resp.json()['message']:
                     print('登录成功')
@@ -285,10 +286,10 @@ class guoshui(object):
                     time.sleep(3)
             else:
                 self.logger.warn("customerid:{}登录失败,重试".format(self.customerid))
-        try_times=0
-        while try_times <= 3:
+        try_handed=0
+        while try_handed <= 3:
             self.logger.info("customerid:{}手动登陆".format())
-            try_times += 1
+            try_handed += 1
             session = requests.session()
             # proxy_list = get_all_proxie()
             # proxy = proxy_list[random.randint(0, len(proxy_list) - 1)]
