@@ -1358,7 +1358,7 @@ class guoshui(object):
     def excute_spider(self):
         try:
             cookies = self.login()
-            logger.info("customerid:{}获取cookies".format(self.customerid))
+            self.logger.info("customerid:{}获取cookies".format(self.customerid))
             jsoncookies = json.dumps(cookies)
             if "账号和密码不匹配" in jsoncookies:
                 self.logger.warn("customerid:{}账号和密码不匹配".format(self.customerid))

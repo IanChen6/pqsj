@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be93bd86-aa2f-42d7-9157-c290b2f33891" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/tasks.py" afterPath="$PROJECT_DIR$/tasks_sz.py" />
+      <change beforePath="$PROJECT_DIR$/guoshui.py" afterPath="$PROJECT_DIR$/guoshui.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +20,8 @@
       <file leaf-file-name="guoshui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guoshui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1550">
-              <caret line="233" column="40" lean-forward="true" selection-start-line="233" selection-start-column="40" selection-end-line="233" selection-end-column="40" />
+            <state relative-caret-position="133">
+              <caret line="1360" column="17" lean-forward="false" selection-start-line="1360" selection-start-column="17" selection-end-line="1360" selection-end-column="17" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
               </folding>
@@ -33,7 +32,7 @@
       <file leaf-file-name="tasks_sz.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tasks_sz.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
+            <state relative-caret-position="627">
               <caret line="33" column="84" lean-forward="false" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
               <folding>
                 <element signature="e#315#345#0" expanded="true" />
@@ -82,7 +81,6 @@
       <find>cookies.json</find>
       <find>cre</find>
       <find>os.</find>
-      <find>log</find>
       <find>reso</find>
       <find>sys</find>
       <find>excu</find>
@@ -103,6 +101,7 @@
       <find>mini-grid</find>
       <find>session</find>
       <find>login</find>
+      <find>log</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -127,7 +126,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="597" />
     <option name="y" value="90" />
     <option name="width" value="1126" />
@@ -258,7 +257,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="597" y="90" width="1126" height="983" extended-state="0" />
+    <frame x="597" y="90" width="1126" height="983" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -667,7 +666,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tasks_sz.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
+        <state relative-caret-position="627">
           <caret line="33" column="84" lean-forward="false" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
           <folding>
             <element signature="e#315#345#0" expanded="true" />
@@ -677,8 +676,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guoshui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1550">
-          <caret line="233" column="40" lean-forward="true" selection-start-line="233" selection-start-column="40" selection-end-line="233" selection-end-column="40" />
+        <state relative-caret-position="133">
+          <caret line="1360" column="17" lean-forward="false" selection-start-line="1360" selection-start-column="17" selection-end-line="1360" selection-end-column="17" />
           <folding>
             <element signature="e#23#38#0" expanded="true" />
           </folding>
