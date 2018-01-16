@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be93bd86-aa2f-42d7-9157-c290b2f33891" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/guoshui.py" afterPath="$PROJECT_DIR$/guoshui.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +21,8 @@
       <file leaf-file-name="guoshui.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guoshui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="1344" column="71" lean-forward="false" selection-start-line="1344" selection-start-column="71" selection-end-line="1344" selection-end-column="71" />
+            <state relative-caret-position="-1550">
+              <caret line="233" column="40" lean-forward="true" selection-start-line="233" selection-start-column="40" selection-end-line="233" selection-end-column="40" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
               </folding>
@@ -72,9 +73,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>random</find>
       <find>logg</find>
-      <find>login</find>
       <find>os</find>
       <find>cook</find>
       <find>.json</find>
@@ -102,6 +101,8 @@
       <find>开始</find>
       <find>excute</find>
       <find>mini-grid</find>
+      <find>session</find>
+      <find>login</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -126,11 +127,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="715" />
-    <option name="y" value="74" />
-    <option name="width" value="1735" />
-    <option name="height" value="976" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="597" />
+    <option name="y" value="90" />
+    <option name="width" value="1126" />
+    <option name="height" value="983" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -257,7 +258,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <frame x="597" y="90" width="1126" height="983" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -266,7 +267,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1673774" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2945591" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -302,47 +303,47 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>413</line>
+          <line>427</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>225</line>
+          <line>227</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>260</line>
+          <line>264</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>349</line>
+          <line>363</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>365</line>
+          <line>379</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>505</line>
+          <line>520</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>596</line>
+          <line>611</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>618</line>
+          <line>634</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/guoshui.py</url>
-          <line>469</line>
+          <line>483</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -676,8 +677,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guoshui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="1344" column="71" lean-forward="false" selection-start-line="1344" selection-start-column="71" selection-end-line="1344" selection-end-column="71" />
+        <state relative-caret-position="-1550">
+          <caret line="233" column="40" lean-forward="true" selection-start-line="233" selection-start-column="40" selection-end-line="233" selection-end-column="40" />
           <folding>
             <element signature="e#23#38#0" expanded="true" />
           </folding>
