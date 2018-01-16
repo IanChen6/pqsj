@@ -82,15 +82,13 @@ class guoshui(object):
 
     def insert_db(self, sql, params):
         conn = pymssql.connect(host=self.host, port=self.port, user='Python', password='pl,okmPL<OKM',
-                               database=self.db, charset='utf8')
+                               database=self.db, charset='utf8',autocommit=True)
         cur = conn.cursor()
         if not cur:
             raise Exception("数据库连接失败")
         # cur.callproc('[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]', (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
         len(params)
-        conn.autocommit(True)
         cur.callproc(sql, params)
-        conn.autocommit(False)
         # conn.commit()
         cur.close()
 
