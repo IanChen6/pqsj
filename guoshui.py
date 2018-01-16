@@ -39,9 +39,9 @@ import sys
 
 
 class guoshui(object):
-    def __init__(self, user, pwd, batchid, batchyear, batchmonth, companyid, customerid):
+    def __init__(self, user, pwd, batchid, batchyear, batchmonth, companyid, customerid,logger):
         # self.logger = create_logger(path=os.path.basename(__file__) + str(customerid))
-        self.logger = create_logger(path=os.path.dirname(sys.argv[0]).split('/')[-1])
+        self.logger = logger
         self.user = user
         self.pwd = pwd
         self.batchid = batchid
@@ -160,7 +160,7 @@ class guoshui(object):
                     result1 = str(auto)
                     return result1
                 if auto is None:
-                    return auto
+                    return ""
                 # result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
                 # # flag = login("91440300MA5DRRFB45", "10284784", result)
                 # for i in range(30):

@@ -31,7 +31,7 @@ def run_test(user, pwd, batchid, batchyear, batchmonth,companyid, customerid,hos
     time.sleep(2)
     logger=create_logger(path=os.path.dirname(sys.argv[0]).split('/')[-1])
     try:
-        gs = guoshui(user,pwd,batchid,batchyear, batchmonth,companyid, customerid)
+        gs = guoshui(user,pwd,batchid,batchyear, batchmonth,companyid, customerid,logger)
         gs.excute_spider()
     except Exception as e:
         logger.info("something wrong during crawling")
