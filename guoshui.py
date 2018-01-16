@@ -160,7 +160,7 @@ class guoshui(object):
                     result1 = str(auto)
                     return result1
                 if auto is None:
-                    return ""
+                    return auto
                 # result = client.service.SetYZImg(123456, "1215454545", "pyj", md, tupian)
                 # # flag = login("91440300MA5DRRFB45", "10284784", result)
                 # for i in range(30):
@@ -260,6 +260,8 @@ class guoshui(object):
             # logger.info("customerid:{},:{}".format(self.customerid,tupian))
             tag = self.tagger(tupian, md)
             self.logger.info("customerid:{}，获取验证码为：{}".format(self.customerid,tag))
+            if tag is None:
+                continue
             jyjg = session.post(url='http://dzswj.szgs.gov.cn/api/checkClickTipCaptcha', data=tag)
             self.logger.info("customerid:{}，验证验证码{}".format(self.customerid,tag))
             time_l = time.localtime(int(time.time()))
