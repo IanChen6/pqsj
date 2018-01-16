@@ -36,7 +36,7 @@ from get_db import job_finish
 from get_db import get_db
 import sys
 #
-logger = create_logger()
+logger = create_logger(path=os.path.basename(__file__))
 
 
 class guoshui(object):
@@ -60,8 +60,8 @@ class guoshui(object):
         if batchmonth != 0:
             monthRange = calendar.monthrange(batchyear, batchmonth)
             self.days = monthRange[1]
-        if not os.path.exists('{}'.format(user)):
-            os.mkdir('{}'.format(user))
+        if not os.path.exists('resource/{}'.format(user)):
+            os.mkdir('resource/{}'.format(user))
 
     def upload_img(self, path):
         with open(path, 'rb') as a:
@@ -252,7 +252,7 @@ class guoshui(object):
             m.update(tupian1)
             md = m.hexdigest()
             print(md)
-            logger.info("customerid:{},:{}".format(tupian))
+            # logger.info("customerid:{},:{}".format(self.customerid,tupian))
             tag = self.tagger(tupian, md)
             logger.info("customerid:{}，获取验证码为：{}".format(self.customerid,tag))
             jyjg = session.post(url='http://dzswj.szgs.gov.cn/api/checkClickTipCaptcha', data=tag)
@@ -1330,7 +1330,7 @@ class guoshui(object):
         try:
             cookies, session = self.login()
             jsoncookies = json.dumps(cookies)
-            with open('cookies.json', 'w') as f:  # 将login后的cookies提取出来
+            with open('./{}cookies.json'.format(self.customerid), 'w') as f:  # 将login后的cookies提取出来
                 f.write(jsoncookies)
                 f.close()
         except Exception as e:
@@ -1361,7 +1361,7 @@ class guoshui(object):
             index_url = "http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html"
             browser.get(url=index_url)
             browser.delete_all_cookies()
-            with open('cookies.json', 'r', encoding='utf8') as f:
+            with open('./{}cookies.json'.format(self.customerid), 'r', encoding='utf8') as f:
                 cookielist = json.loads(f.read())
             for (k, v) in cookielist.items():
                 browser.add_cookie({
