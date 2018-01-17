@@ -1414,6 +1414,8 @@ class guoshui(object):
             dcap["phantomjs.page.settings.userAgent"] = (
                 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
             dcap["phantomjs.page.settings.loadImages"] = True
+            # service_args = []
+            # service_args.append('szgs')
             # browser = webdriver.PhantomJS(
             #     executable_path='D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe',
             #     desired_capabilities=dcap)

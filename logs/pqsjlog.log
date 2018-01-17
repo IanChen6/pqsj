@@ -471,3 +471,17 @@ Wed 17 Jan 2018 17:58:52 INFO guoshui.py 647 15104 10140 customerid:9,地税全年数
 Wed 17 Jan 2018 17:59:06 WARNING guoshui.py 633 15104 10140 Message: 
 Screenshot: available via screen
 
+Wed 17 Jan 2018 18:18:20 INFO guoshui.py 230 16696 17356 customerid:9,开始尝试登陆
+Wed 17 Jan 2018 18:18:20 INFO guoshui.py 240 16696 17356 未传代理参数，启用本机IP
+Wed 17 Jan 2018 18:18:57 INFO guoshui.py 230 13228 14880 customerid:9,开始尝试登陆
+Wed 17 Jan 2018 18:18:57 INFO guoshui.py 240 13228 14880 未传代理参数，启用本机IP
+Wed 17 Jan 2018 18:18:59 INFO guoshui.py 266 13228 14880 customerid:9，获取验证码为：None
+Wed 17 Jan 2018 18:18:59 INFO guoshui.py 230 13228 14880 customerid:9,开始尝试登陆
+Wed 17 Jan 2018 18:18:59 INFO guoshui.py 240 13228 14880 未传代理参数，启用本机IP
+Wed 17 Jan 2018 18:19:01 INFO guoshui.py 266 13228 14880 customerid:9，获取验证码为：[{"x":73,"y":55},{"x":19,"y":67},{"x":123,"y":62}]
+Wed 17 Jan 2018 18:19:01 INFO guoshui.py 270 13228 14880 customerid:9，验证验证码[{"x":73,"y":55},{"x":19,"y":67},{"x":123,"y":62}]
+Wed 17 Jan 2018 18:19:01 INFO guoshui.py 278 13228 14880 customerid:9,成功post数据
+Wed 17 Jan 2018 18:19:01 INFO guoshui.py 285 13228 14880 customerid:9pass
+Wed 17 Jan 2018 18:19:01 INFO guoshui.py 1398 13228 14880 customerid:9获取cookies
+Wed 17 Jan 2018 18:19:04 WARNING guoshui.py 1430 13228 14880 Message: Service D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe unexpectedly exited. Status code was: 4294967295
+
