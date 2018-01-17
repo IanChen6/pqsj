@@ -1359,11 +1359,11 @@ class guoshui(object):
         try:
             cookies = self.login()
             self.logger.info("customerid:{}获取cookies".format(self.customerid))
-            jsoncookies = json.dumps(cookies)
+            jsoncookies = json.dumps(cookies,ensure_ascii=False)
             if "账号和密码不匹配" in jsoncookies:
                 self.logger.warn("customerid:{}账号和密码不匹配".format(self.customerid))
                 job_finish(self.host, self.port, self.db, self.batchid, self.companyid, self.customerid, '-2', "账号和密码不匹配")
-
+                return
             with open('cookies/{}cookies.json'.format(self.customerid), 'w') as f:  # 将login后的cookies提取出来
                 f.write(jsoncookies)
                 f.close()
