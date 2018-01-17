@@ -287,7 +287,7 @@ class guoshui(object):
                         for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
                             cookies[k] = v
                         return cookies
-                    elif "账户和密码不匹配" in resp.json()['message'] or "账户不存在" in resp.json()['message']:
+                    elif "账户和密码不匹配" in resp.json()['message'] or "不存在" in resp.json()['message'] or "已注销" in resp.json()['message']:
                         print('账号和密码不匹配')
                         self.logger.info('customerid:{}账号和密码不匹配'.format(self.customerid))
                         status="账号和密码不匹配"
@@ -348,7 +348,7 @@ class guoshui(object):
                     for (k, v) in zip(session.cookies.keys(), session.cookies.values()):
                         cookies[k] = v
                     return cookies
-                elif "账户和密码不匹配" in resp.json()['message'] or "账户不存在" in resp.json()['message']:
+                elif "账户和密码不匹配" in resp.json()['message'] or "不存在" in resp.json()['message'] or "已注销" in resp.json()['message']:
                     print('账号和密码不匹配')
                     self.logger.info('customerid:{}账号和密码不匹配'.format(self.customerid))
                     status = "账号和密码不匹配"
@@ -542,7 +542,7 @@ class guoshui(object):
                 try:
                     browser.find_element_by_css_selector("#mini-37 .mini-button-text").click()
                 except Exception as e:
-                    self.logger.info("customerid:{}服务器出错".format(self.customerid))
+                    self.logger.info("customerid:{}无弹窗".format(self.customerid))
                 wait = ui.WebDriverWait(browser, 10)
                 wait.until(lambda browser: browser.find_element_by_css_selector("#stepnext .mini-button-text"))
                 browser.find_element_by_css_selector("#stepnext .mini-button-text").click()
@@ -580,7 +580,7 @@ class guoshui(object):
             try:
                 browser.find_element_by_css_selector("#mini-37 .mini-button-text").click()
             except Exception as e:
-                self.logger.warn(e)
+                self.logger.info(e)
                 print("没有弹窗")
             wait = ui.WebDriverWait(browser, 10)
             wait.until(lambda browser: browser.find_element_by_css_selector("#stepnext .mini-button-text"))
@@ -1377,9 +1377,7 @@ class guoshui(object):
             dcap["phantomjs.page.settings.userAgent"] = (
                 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
             dcap["phantomjs.page.settings.loadImages"] = True
-            # browser = webdriver.PhantomJS(
-            #     executable_path='D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe',
-            #     desired_capabilities=dcap)
+
             browser = webdriver.PhantomJS(
                 executable_path='/home/tool/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',
                 desired_capabilities=dcap)
