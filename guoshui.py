@@ -585,6 +585,7 @@ class guoshui(object):
             wait = ui.WebDriverWait(browser, 10)
             wait.until(lambda browser: browser.find_element_by_css_selector("#stepnext .mini-button-text"))
             browser.find_element_by_css_selector("#stepnext .mini-button-text").click()
+            time.sleep(3)
             img = self.save_png(browser, 'resource/{}/缴税信息.png'.format(self.user))
             iml = []
             iml.append(img)
@@ -628,7 +629,9 @@ class guoshui(object):
             try:
                 self.dishui(browser)
                 return True
-            except:
+            except Exception as e:
+                self.logger.warn(e)
+                browser.get("http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html")
                 try_times += 1
 
     def dishui(self, browser):
@@ -641,6 +644,7 @@ class guoshui(object):
                 browser.close()
                 browser.switch_to_window(c_window)
         if self.wholeyear:
+            self.logger.info("customerid:{},地税全年数据".format(self.customerid))
             wait = ui.WebDriverWait(browser, 10)
             wait.until(
                 lambda browser: browser.find_element_by_css_selector(
@@ -657,6 +661,17 @@ class guoshui(object):
             browser.switch_to_frame('qymain')
             wait.until(lambda browser: browser.find_element_by_css_selector('#sbqq'))
             for m in range(1, 13):
+                browser.switch_to_default_content()
+                browser.find_element_by_css_selector('#menu_110000_110109').click()
+                time.sleep(2)
+                browser.switch_to_frame('qyIndex')
+                sbjkcx = browser.page_source
+                wait.until(lambda browser: browser.find_element_by_css_selector("#menu2_13_110200"))  # 容易timeout
+                browser.find_element_by_css_selector('#menu2_13_110200').click()
+                time.sleep(2)
+                browser.find_element_by_css_selector('#menu3_15_110202').click()
+                browser.switch_to_frame('qymain')
+                wait.until(lambda browser: browser.find_element_by_css_selector('#sbqq'))
                 year = self.batchyear
                 if 0 < m < 10:
                     monthRange = calendar.monthrange(year, m)
@@ -670,6 +685,7 @@ class guoshui(object):
                 zzrq = '{}-{}-{}'.format(year, month, days)
                 self.logger.info("customerid:{}查询{}月".format(self.customerid, m))
                 # 查询个人所得税
+                wait.until(lambda browser: browser.find_element_by_css_selector('#zsxmDm'))
                 browser.find_element_by_css_selector('#zsxmDm').find_element_by_xpath(
                     '//option[@value="10106"]').click()  # 选择个人所得税
                 sb_startd = browser.find_element_by_css_selector('#sbqq')
@@ -682,6 +698,7 @@ class guoshui(object):
                 browser.find_element_by_css_selector('#query').click()
                 time.sleep(2)
                 grsd = self.save_png(browser, 'resource/{}/地税个人所得税已申报查询.png'.format(self.user))
+                self.logger.info("customerid:{}查询{}月个人所得税信息".format(self.customerid, m))
                 # 表格信息爬取
                 content = browser.page_source
                 root = etree.HTML(content)
@@ -717,7 +734,7 @@ class guoshui(object):
                         pdf_content = requests.post(url=post_url, headers=headers, data=post_data, timeout=10,
                                                     cookies=ck).content
                         if "错误" not in resp:
-                            with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
+                            with open("resource/{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
                                 w.write(pdf_content)
                             pdf = self.upload_img("resource/{}/申报表详情{}.pdf".format(self.user, pzxh))
                             pdf_list.append(pdf)
@@ -729,9 +746,11 @@ class guoshui(object):
                             str(jsxx[3]), None, None,
                             self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
                         self.logger.info(params)
+                        self.logger.info("customerid:{}查询{}月个人所得税信息插入数据库".format(self.customerid, m))
                         self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
+                        self.logger.info("customerid:{}查询{}月数据入库完成".format(self.customerid, m))
                         index += 1
-
+                self.logger.info("customerid:{}查询{}月个人所得税查询完毕".format(self.customerid, m))
                 # 企业所得税
                 browser.switch_to_default_content()
                 browser.switch_to_frame('qyIndex')
@@ -749,7 +768,7 @@ class guoshui(object):
                 browser.find_element_by_css_selector('#query').click()
                 time.sleep(2)
                 qysd = self.save_png(browser, 'resource/{}/地税企业所得税已申报查询.png'.format(self.user))
-
+                self.logger.info("customerid:{}查询{}月地税企业所得祱所得税查询".format(self.customerid, m))
                 # 表格信息爬取
                 content = browser.page_source
                 root = etree.HTML(content)
@@ -786,7 +805,7 @@ class guoshui(object):
                                                     cookies=ck).content
 
                         if "错误" not in resp2:
-                            with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
+                            with open("resource/{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
                                 w.write(pdf_content)
                             pdf2 = self.upload_img("resource/{}/申报表详情{}.pdf".format(self.user, pzxh))
                             pdf_list.append(pdf2)
@@ -798,9 +817,11 @@ class guoshui(object):
                             str(jsxx[3]), str(jsxx[4]), str(jsxx[5]), str(jsxx[6]), str(jsxx[7]),
                             self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
                         self.logger.info(params)
+                        self.logger.info("customerid:{}查询{}月数据入库".format(self.customerid, m))
                         self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
+                        self.logger.info("customerid:{}查询{}月数据入库完成".format(self.customerid, m))
                         index += 1
-
+                self.logger.info("customerid:{}查询{}月地税企业所得祱所得税查询完成".format(self.customerid, m))
                 # 城市建设税
                 browser.switch_to_default_content()
                 browser.switch_to_frame('qyIndex')
@@ -818,7 +839,7 @@ class guoshui(object):
                 browser.find_element_by_css_selector('#query').click()
                 time.sleep(2)
                 csjs = self.save_png(browser, 'resource/{}/地税城市建设税已申报查询.png'.format(self.user))
-
+                self.logger.info("customerid:{}查询{}月城市建设税查询完成".format(self.customerid, m))
                 # 表格信息爬取
                 content = browser.page_source
                 root = etree.HTML(content)
@@ -855,7 +876,7 @@ class guoshui(object):
                                                     cookies=ck).content
 
                         if "错误" not in resp1:
-                            with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
+                            with open("resource/{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
                                 w.write(pdf_content)
                             time.sleep(0.5)
                             pdf1 = self.upload_img("resource/{}/申报表详情{}.pdf".format(self.user, pzxh))
@@ -875,9 +896,12 @@ class guoshui(object):
                             str(jsxx[3]), str(jsxx[4]), str(jsxx[5]), str(jsxx[6]), str(jsxx[7]),
                             pdf_json)  # self.img2json("申报表详情{}.pdf".format(pzxh))
                         self.logger.info(params)
+                        self.logger.info("customerid:{}查询{}月地税数据入库".format(self.customerid, m))
                         self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
+                        self.logger.info("customerid:{}查询{}月地税数据入库完成".format(self.customerid, m))
                         index += 1
                 elif "没有" in pg:
+                    self.logger.info("customerid:{}查询{}月城建税已申报无数据".format(self.customerid, m))
                     browser.switch_to_default_content()
                     browser.find_element_by_css_selector('#menu_100000_102001').click()
                     browser.switch_to_frame('qyIndex')
@@ -891,6 +915,7 @@ class guoshui(object):
                     for i in dsjudge:
                         xgm = i.xpath('.//text()')
                         if '查无数据' in xgm:
+                            self.logger.info("customerid:{}查询{}月城建税三项无数据".format(self.customerid, m))
                             params = (
                                 self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, "", "")
                             self.insert_db('[dbo].[Python_Serivce_DSTaxApplyShenZhen_NoDS3]', params)
@@ -921,6 +946,8 @@ class guoshui(object):
                 browser.switch_to_default_content()
                 browser.find_element_by_css_selector('#menu_110000_110109').click()
                 browser.switch_to_frame('qyIndex')
+                wait.until(lambda browser: browser.find_element_by_css_selector("#menu2_13_110200"))  # 容易timeout
+                browser.find_element_by_css_selector('#menu2_13_110200').click()
                 browser.find_element_by_css_selector('#menu3_17_110204').click()
                 browser.switch_to_frame('qymain')
                 gbds = browser.window_handles
@@ -1042,6 +1069,7 @@ class guoshui(object):
             browser.find_element_by_css_selector('#query').click()
             time.sleep(2)
             grsd = self.save_png(browser, 'resource/{}/地税个人所得税已申报查询.png'.format(self.user))
+            self.logger.info("customerid:{}地税个人所得税信息查询".format(self.customerid))
 
             # 表格信息爬取
             content = browser.page_source
@@ -1079,7 +1107,7 @@ class guoshui(object):
                                                 cookies=ck).content
 
                     if "错误" not in resp:
-                        with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
+                        with open("resource/{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
                             w.write(pdf_content)
                         pdf = self.upload_img("resource/{}/申报表详情{}.pdf".format(self.user, pzxh))
                         pdf_list.append(pdf)
@@ -1091,7 +1119,9 @@ class guoshui(object):
                         str(jsxx[3]), "", "",
                         self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
                     self.logger.info(params)
+                    self.logger.info("customerid:{}地税个人所得税数据入库".format(self.customerid))
                     self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
+                    self.logger.info("customerid:{}地税个人所得税数据入库完成".format(self.customerid))
                     index += 1
 
             # 企业所得税
@@ -1111,6 +1141,7 @@ class guoshui(object):
             browser.find_element_by_css_selector('#query').click()
             time.sleep(2)
             qysd = self.save_png(browser, 'resource/{}/地税企业所得税已申报查询.png'.format(self.user))
+            self.logger.info("customerid:{}地税企业所得税查询".format(self.customerid))
 
             # 表格信息爬取
             content = browser.page_source
@@ -1148,7 +1179,7 @@ class guoshui(object):
                                                 cookies=ck).content
 
                     if "错误" not in resp2:
-                        with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
+                        with open("resource/{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
                             w.write(pdf_content)
                         pdf2 = self.upload_img("resource/{}/申报表详情{}.pdf".format(self.user, pzxh))
                         pdf_list.append(pdf2)
@@ -1159,7 +1190,9 @@ class guoshui(object):
                         str(jsxx[3]), str(jsxx[4]), str(jsxx[5]), str(jsxx[6]), str(jsxx[7]),
                         self.img2json(pdf_list))  # self.img2json("申报表详情{}.pdf".format(pzxh))
                     self.logger.info(params)
+                    self.logger.info("customerid:{}地税企业所得税数据入库".format(self.customerid))
                     self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
+                    self.logger.info("customerid:{}地税企业所得税数据入库完成".format(self.customerid))
                     index += 1
 
             # 城市建设税
@@ -1179,6 +1212,7 @@ class guoshui(object):
             browser.find_element_by_css_selector('#query').click()
             time.sleep(2)
             csjs = self.save_png(browser, 'resource/{}/地税城市建设税已申报查询.png'.format(self.user))
+            self.logger.info("customerid:{}地税城建税".format(self.customerid))
 
             # 表格信息爬取
             content = browser.page_source
@@ -1216,7 +1250,7 @@ class guoshui(object):
                                                 cookies=ck).content
 
                     if "错误" not in resp1:
-                        with open("{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
+                        with open("resource/{}/申报表详情{}.pdf".format(self.user, pzxh), 'wb') as w:
                             w.write(pdf_content)
                         time.sleep(0.5)
                         pdf1 = self.upload_img("resource/{}/申报表详情{}.pdf".format(self.user, pzxh))
@@ -1237,9 +1271,12 @@ class guoshui(object):
                         str(jsxx[3]), str(jsxx[4]), str(jsxx[5]), str(jsxx[6]), str(jsxx[7]),
                         pdf_json)  # self.img2json("申报表详情{}.pdf".format(pzxh))
                     self.logger.info(params)
+                    self.logger.info("customerid:{}地税城建税数据入库".format(self.customerid))
                     self.insert_db("[dbo].[Python_Serivce_DSTaxApplyShenZhen_Add]", params)
+                    self.logger.info("customerid:{}地税城建税数据入库完成".format(self.customerid))
                     index += 1
             elif "没有" in pg:
+                self.logger.info("customerid:{}地税城建无数据".format(self.customerid))
                 browser.switch_to_default_content()
                 browser.find_element_by_css_selector('#menu_100000_102001').click()
                 browser.switch_to_frame('qyIndex')
@@ -1253,10 +1290,10 @@ class guoshui(object):
                 for i in dsjudge:
                     xgm = i.xpath('.//text()')
                     if '查无数据' in xgm:
+                        self.logger.info("customerid:{}地税城建三项无数据".format(self.customerid))
                         params = (
                         self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, "", "")
                         self.insert_db('[dbo].[Python_Serivce_DSTaxApplyShenZhen_NoDS3]', params)
-
             self.logger.info("customerid:{}截取地税申报信息已完成".format(self.customerid))
             # 已缴款查询
             gbds = browser.window_handles
@@ -1377,7 +1414,9 @@ class guoshui(object):
             dcap["phantomjs.page.settings.userAgent"] = (
                 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
             dcap["phantomjs.page.settings.loadImages"] = True
-
+            # browser = webdriver.PhantomJS(
+            #     executable_path='D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe',
+            #     desired_capabilities=dcap)
             browser = webdriver.PhantomJS(
                 executable_path='/home/tool/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',
                 desired_capabilities=dcap)
