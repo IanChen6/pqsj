@@ -24,7 +24,7 @@ from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
 from pdfminer.pdfparser import PDFParser, PDFDocument
 from suds.client import Client
 import suds
-from proxy_ceshi import get_all_proxie
+# from proxy_ceshi import get_all_proxie
 
 try:
     import urlparse as parse
@@ -631,7 +631,17 @@ class guoshui(object):
                 return True
             except Exception as e:
                 self.logger.warn(e)
-                browser.get("http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html")
+                pg=browser.page_source
+                if "抱歉" in pg:
+                    browser.find_element_by_xpath('//button[@type="button"]').click()
+                newwindow = 'window.open("http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html")'
+                browser.execute_script(newwindow)
+                all = browser.window_handles
+                curr = browser.current_window_handle
+                for window in all:
+                    if window != curr:
+                        browser.close()
+                        browser.switch_to_window(curr)
                 try_times += 1
 
     def dishui(self, browser):
@@ -920,6 +930,7 @@ class guoshui(object):
                                 self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid, "", "")
                             self.insert_db('[dbo].[Python_Serivce_DSTaxApplyShenZhen_NoDS3]', params)
                 self.logger.info("customerid:{}截取地税申报信息已完成".format(self.customerid))
+
         if self.wholeyear:
             for m in range(1, 13):
                 year = self.batchyear
@@ -949,6 +960,7 @@ class guoshui(object):
                 wait.until(lambda browser: browser.find_element_by_css_selector("#menu2_13_110200"))  # 容易timeout
                 browser.find_element_by_css_selector('#menu2_13_110200').click()
                 browser.find_element_by_css_selector('#menu3_17_110204').click()
+                time.sleep(1.5)
                 browser.switch_to_frame('qymain')
                 gbds = browser.window_handles
                 dq = browser.current_window_handle
@@ -1306,7 +1318,10 @@ class guoshui(object):
             browser.switch_to_default_content()
             browser.find_element_by_css_selector('#menu_110000_110109').click()
             browser.switch_to_frame('qyIndex')
+            browser.find_element_by_css_selector('#menu2_13_110200').click()
+            page=browser.page_source
             browser.find_element_by_css_selector('#menu3_17_110204').click()
+            time.sleep(2)
             browser.switch_to_frame('qymain')
 
             page = browser.page_source
@@ -1336,6 +1351,8 @@ class guoshui(object):
 
             for i in select:
                 jkxx = i.xpath('.//text()')
+                if "没有符合条件的数据" in jkxx:
+                    break
                 pz = jkxx[0]
                 print(jkxx)
                 pz_l.append(pz)
@@ -1391,6 +1408,48 @@ class guoshui(object):
                 self.logger.info(params)
                 self.insert_db("[dbo].[Python_Serivce_DSTaxChargeShenZhen_Add]", params)
             self.logger.info("customerid:{}截取地税缴款信息已完成".format(self.customerid))
+        gbds = browser.window_handles
+        dq = browser.current_window_handle
+        for s in gbds:
+            if s != dq:
+                browser.switch_to_window(s)
+                browser.close()
+                browser.switch_to_window(dq)
+        browser.switch_to_default_content()
+        browser.switch_to_frame('qyIndex')
+        browser.find_element_by_css_selector('#menu3_14_110201').click()
+        browser.switch_to_frame('qymain')
+        page = browser.page_source
+        # browser.switch_to_window(window1)
+        wait = ui.WebDriverWait(browser, 10)
+        wait.until(lambda browser: browser.find_element_by_css_selector('#txtStart'))
+        browser.find_element_by_css_selector('#query').click()
+        time.sleep(2)
+        jietu = self.save_png(browser, 'resource/{}/地税未申报查询.png'.format(self.user))
+        # 缴款表格信息爬取
+        content = browser.page_source
+        root = etree.HTML(content)
+        select = root.xpath('//table[@id="dataTab"]/tbody/tr')
+
+        for i in select:
+            jkxx = i.xpath('.//text()')
+            if "没有符合条件的数据" in jkxx:
+                break
+            taxjson = {}
+            taxjson["结果截图"] = jietu
+            taxjson["征收项目"] = jkxx[0]
+            taxjson["开始日期"] = jkxx[1]
+            taxjson["结束日期"] = jkxx[2]
+            taxjson["申报期限"] = jkxx[3]
+            taxjson["征收代理方式"] = jkxx[4]
+            taxjson["是否逾期"] = jkxx[5]
+            taxjson["操作"] = jkxx[6]
+            taxjson = json.dumps(taxjson, ensure_ascii=False)
+            params = (
+                self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid,
+                taxjson)
+            print(params)
+            self.insert_db("[dbo].[Python_Service_DSTaxExpireShenZhen_Add] ", params)
 
     def excute_spider(self):
         try:
@@ -1414,11 +1473,11 @@ class guoshui(object):
             dcap["phantomjs.page.settings.userAgent"] = (
                 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
             dcap["phantomjs.page.settings.loadImages"] = True
-            # service_args = []
-            # service_args.append('szgs')
+            service_args = []
+            service_args.append('--webdriver=szgs')
             # browser = webdriver.PhantomJS(
             #     executable_path='D:/BaiduNetdiskDownload/phantomjs-2.1.1-windows/bin/phantomjs.exe',
-            #     desired_capabilities=dcap)
+            #     desired_capabilities=dcap,service_args=service_args)
             browser = webdriver.PhantomJS(
                 executable_path='/home/tool/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',
                 desired_capabilities=dcap)
