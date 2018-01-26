@@ -634,14 +634,8 @@ class guoshui(object):
                 pg=browser.page_source
                 if "抱歉" in pg:
                     browser.find_element_by_xpath('//button[@type="button"]').click()
-                newwindow = 'window.open("http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html")'
-                browser.execute_script(newwindow)
-                all = browser.window_handles
-                curr = browser.current_window_handle
-                for window in all:
-                    if window != curr:
-                        browser.close()
-                        browser.switch_to_window(curr)
+                browser.get('http://dzswj.szgs.gov.cn/BsfwtWeb/apps/views/myoffice/myoffice.html')
+
                 try_times += 1
 
     def dishui(self, browser):
@@ -958,7 +952,9 @@ class guoshui(object):
                 browser.find_element_by_css_selector('#menu_110000_110109').click()
                 browser.switch_to_frame('qyIndex')
                 wait.until(lambda browser: browser.find_element_by_css_selector("#menu2_13_110200"))  # 容易timeout
+                time.sleep(0.5)
                 browser.find_element_by_css_selector('#menu2_13_110200').click()
+                time.sleep(1)
                 browser.find_element_by_css_selector('#menu3_17_110204').click()
                 time.sleep(1.5)
                 browser.switch_to_frame('qymain')
@@ -1320,6 +1316,7 @@ class guoshui(object):
             browser.switch_to_frame('qyIndex')
             browser.find_element_by_css_selector('#menu2_13_110200').click()
             page=browser.page_source
+            time.sleep(1)
             browser.find_element_by_css_selector('#menu3_17_110204').click()
             time.sleep(2)
             browser.switch_to_frame('qymain')
@@ -1449,7 +1446,7 @@ class guoshui(object):
                 self.batchid, self.batchyear, self.batchmonth, self.companyid, self.customerid,
                 taxjson)
             print(params)
-            self.insert_db("[dbo].[Python_Service_DSTaxExpireShenZhen_Add] ", params)
+            self.insert_db("[dbo].[Python_Service_DSTaxExpireShenZhen_Add]", params)
 
     def excute_spider(self):
         try:
